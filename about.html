@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – Govt Girls High School Kagdana</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .info-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px; }
+    .info-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--maroon); margin-bottom:12px; }
+    .info-card p, .info-card li { font-size:.9rem; line-height:1.8; color:var(--gray-700); }
+    .info-card ul { list-style:disc; padding-left:20px; }
+    .highlight-box { background:linear-gradient(135deg,var(--maroon),var(--maroon-lt)); color:var(--white); border-radius:var(--radius); padding:32px; text-align:center; }
+    .highlight-box .num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:700; color:var(--gold-lt); }
+    .highlight-box .lbl { font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-top:4px; }
+    .timeline { position:relative; padding-left:28px; }
+    .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--gold); }
+    .tl-item { position:relative; margin-bottom:24px; }
+    .tl-dot { position:absolute; left:-24px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--maroon); border:2px solid var(--gold); }
+    .tl-year { font-weight:800; color:var(--maroon); font-size:.85rem; }
+    .tl-text { font-size:.88rem; color:var(--gray-700); margin-top:4px; }
+    .facility-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+    .facility-item { background:var(--white); border-radius:var(--radius-sm); box-shadow:var(--shadow); padding:20px; text-align:center; }
+    .facility-item .f-icon { font-size:2.4rem; margin-bottom:8px; }
+    .facility-item .f-name { font-weight:700; font-size:.85rem; color:var(--maroon); }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <span class="topbar-address">📍 Village Kagdana, Tehsil Dabwali, Sirsa, Haryana – 125104</span>
+    <span><span class="topbar-contact"></span> &nbsp;|&nbsp; <a href="admin.html">🔐 Admin</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner container">
+    <div class="school-logo">🏫</div>
+    <div class="school-info">
+      <div class="school-name">Govt. Girls High School Kagdana</div>
+      <div class="school-sub">Education Department, Haryana &nbsp;•&nbsp; Sirsa District</div>
+    </div>
+    <div class="header-badges"><span class="badge">Est. 1985</span><span class="badge">Class VI – X</span></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner container">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="teachers.html">Teachers</a></li>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="results.html">Results</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner container">
+    <span class="ticker-label">📢 Notice</span>
+    <div style="overflow:hidden;flex:1"><p class="ticker-text" id="tickerText">Loading...</p></div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <h1>About Our School</h1>
+    <p>History, Vision, Mission &amp; Facilities</p>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+    <div class="grid-4" style="margin-bottom:48px">
+      <div class="highlight-box"><div class="num">38+</div><div class="lbl">Years of Service</div></div>
+      <div class="highlight-box"><div class="num">5</div><div class="lbl">Classes (VI–X)</div></div>
+      <div class="highlight-box"><div class="num">100%</div><div class="lbl">Girl Students</div></div>
+      <div class="highlight-box"><div class="num">Sirsa</div><div class="lbl">District, Haryana</div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px" class="about-grid">
+      <div class="info-card">
+        <h3>🏫 School Overview</h3>
+        <p>Govt. Girls High School Kagdana is a government-run institution located in the rural village of Kagdana, Tehsil Dabwali, in Sirsa District of Haryana. The school operates under the Haryana School Education Department and is committed to providing quality education exclusively to girls.</p>
+        <br>
+        <p>The school offers classes from Class VI to Class X following the Haryana Board of School Education (HBSE) curriculum. It provides free and compulsory education under the Right to Education Act.</p>
+        <br>
+        <ul>
+          <li>Affiliated with: Haryana Board of School Education (HBSE), Bhiwani</li>
+          <li>Medium of Instruction: Hindi &amp; English</li>
+          <li>Location: Village Kagdana, Tehsil Dabwali, Sirsa</li>
+          <li>Working Hours: 8:00 AM – 2:00 PM (Mon–Sat)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="info-card" style="margin-bottom:20px">
+          <h3>🎯 Vision</h3>
+          <p>To be a premier educational institution that empowers every girl with knowledge, skills, values, and confidence to excel in life and contribute positively to society and the nation.</p>
+        </div>
+        <div class="info-card">
+          <h3>📌 Mission</h3>
+          <ul>
+            <li>Provide quality education to every girl regardless of social background</li>
+            <li>Create a safe, inclusive and motivating learning environment</li>
+            <li>Promote academic excellence alongside character development</li>
+            <li>Bridge the gender gap in education in rural Haryana</li>
+            <li>Equip students with skills for the 21st century</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-bottom:48px">
+      <h3>📅 Historical Timeline</h3><br>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1985</div><div class="tl-text">School established as Govt Girls Middle School, Kagdana</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1994</div><div class="tl-text">Upgraded to High School level; Classes IX &amp; X introduced</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2002</div><div class="tl-text">New building constructed; library and science lab added</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2010</div><div class="tl-text">Mid-day meal programme and scholarship schemes launched</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2018</div><div class="tl-text">Computer lab established under Digital India initiative</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024</div><div class="tl-text">School website launched for digital connectivity with students and parents</div></div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>🏗️ School Facilities</h2>
+      <div class="gold-line"></div>
+      <p>Infrastructure designed to support holistic learning</p>
+    </div>
+    <div class="facility-grid" style="margin-bottom:48px">
+      <div class="facility-item"><div class="f-icon">📚</div><div class="f-name">Library</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">1000+ Books</p></div>
+      <div class="facility-item"><div class="f-icon">🔬</div><div class="f-name">Science Lab</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">Fully Equipped</p></div>
+      <div class="facility-item"><div class="f-icon">💻</div><div class="f-name">Computer Lab</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">20 Computers</p></div>
+      <div class="facility-item"><div class="f-icon">⚽</div><div class="f-name">Playground</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">Sports Field</p></div>
+      <div class="facility-item"><div class="f-icon">🍽️</div><div class="f-name">Mid-Day Meal</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">Daily Nutrition</p></div>
+      <div class="facility-item"><div class="f-icon">🚻</div><div class="f-name">Washrooms</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">Clean &amp; Separate</p></div>
+      <div class="facility-item"><div class="f-icon">🏛️</div><div class="f-name">Assembly Hall</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">Functions &amp; Events</p></div>
+      <div class="facility-item"><div class="f-icon">🌿</div><div class="f-name">Green Campus</div><p style="font-size:.75rem;color:var(--gray-500);margin-top:4px">Eco Friendly</p></div>
+    </div>
+
+    <div class="info-card">
+      <h3>📋 Admission Information</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px" class="form-row">
+        <div>
+          <p style="font-weight:700;color:var(--maroon);margin-bottom:8px">Eligibility</p>
+          <ul>
+            <li>Girls only (Class VI to X)</li>
+            <li>Age appropriate to class level</li>
+            <li>Must have passed previous class</li>
+            <li>Priority to village and nearby area students</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700;color:var(--maroon);margin-bottom:8px">Documents Required</p>
+          <ul>
+            <li>Previous school Transfer Certificate</li>
+            <li>Mark sheet of last class</li>
+            <li>Aadhar Card copy</li>
+            <li>Passport size photographs (2)</li>
+            <li>Caste certificate (if applicable)</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:20px;background:var(--gold-pale);padding:14px;border-radius:var(--radius-sm)">
+        <strong style="color:var(--maroon)">📅 Admission Period:</strong> <span style="color:var(--gray-700)">April – June every year. Contact school office for current year dates.</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col"><h4>🏫 School Info</h4><p class="footer-address">Govt. Girls High School Kagdana<br>Village Kagdana, Tehsil Dabwali<br>Sirsa, Haryana – 125104</p></div>
+      <div class="footer-col"><h4>🔗 Quick Links</h4><ul>
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About School</a></li>
+        <li><a href="teachers.html">Faculty</a></li><li><a href="activities.html">Activities</a></li>
+        <li><a href="gallery.html">Gallery</a></li><li><a href="results.html">Results</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>📞 Contact</h4><p class="footer-contact-info">📧 gghs.kagdana@gmail.com<br>📍 Village Kagdana, Sirsa<br>🕐 Mon – Sat: 8:00 AM – 2:00 PM</p></div>
+      <div class="footer-col"><h4>🏛️ Education Dept.</h4><p>Under Haryana Education Department<br>Block Resource Centre: Dabwali<br>District: Sirsa</p></div>
+    </div>
+  </div>
+  <div class="footer-bar"><div class="container">© 2024 Govt. Girls High School Kagdana, Sirsa. All Rights Reserved.</div></div>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>

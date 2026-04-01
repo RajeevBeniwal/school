@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results – Govt Girls High School Kagdana</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .search-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-lg); padding:36px; max-width:600px; margin:0 auto 48px; }
+    .search-box h2 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--maroon); margin-bottom:6px; text-align:center; }
+    .search-box p { text-align:center; color:var(--gray-500); margin-bottom:24px; font-size:.9rem; }
+    .result-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-lg); overflow:hidden; max-width:900px; margin:0 auto; }
+    .result-header { background:linear-gradient(135deg,var(--maroon-dk),var(--maroon)); color:var(--white); padding:28px 32px; }
+    .result-header h2 { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; }
+    .result-meta { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:16px; margin-top:20px; }
+    .meta-item { background:rgba(255,255,255,.1); border-radius:8px; padding:12px; }
+    .meta-item .lbl { font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+    .meta-item .val { font-weight:700; font-size:.95rem; margin-top:3px; }
+    .result-body { padding:28px 32px; }
+    .sub-table thead { background:var(--maroon); }
+    .result-summary { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:16px; margin-top:24px; }
+    .sum-box { background:var(--gold-pale); border-radius:var(--radius-sm); padding:18px; text-align:center; border:2px solid transparent; }
+    .sum-box.pass { border-color:#28a745; background:#d4edda; }
+    .sum-box.fail { border-color:#dc3545; background:#f8d7da; }
+    .sum-box .num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; color:var(--maroon); }
+    .sum-box .lbl { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gray-500); margin-top:4px; }
+    .no-result { text-align:center; padding:48px; }
+    .no-result .icon { font-size:3.5rem; margin-bottom:16px; }
+    .print-btn { background:var(--maroon); color:var(--white); border:none; padding:10px 24px; border-radius:8px; font-size:.85rem; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; display:flex; align-items:center; gap:8px; }
+    .class-filter { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+    .cf-btn { padding:6px 18px; border-radius:99px; font-size:.78rem; font-weight:700; border:2px solid var(--maroon); background:transparent; color:var(--maroon); cursor:pointer; transition:all .2s; font-family:'Nunito',sans-serif; }
+    .cf-btn.active,.cf-btn:hover { background:var(--maroon); color:var(--white); }
+    .tabs { display:flex; border-bottom:2px solid var(--gray-200); margin-bottom:32px; gap:0; }
+    .tab { padding:12px 28px; font-weight:700; font-size:.85rem; cursor:pointer; color:var(--gray-500); border-bottom:3px solid transparent; margin-bottom:-2px; transition:all .2s; }
+    .tab.active { color:var(--maroon); border-bottom-color:var(--maroon); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+    @media print {
+      .topbar,.nav,nav,.ticker-wrap,.page-hero,.tabs,.search-box,.class-filter,.print-btn,footer,header { display:none !important; }
+      .result-card { box-shadow:none; }
+      body { background:white; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <span class="topbar-address">📍 Village Kagdana, Tehsil Dabwali, Sirsa, Haryana – 125104</span>
+    <span><span class="topbar-contact"></span> &nbsp;|&nbsp; <a href="admin.html">🔐 Admin</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner container">
+    <div class="school-logo">🏫</div>
+    <div class="school-info">
+      <div class="school-name">Govt. Girls High School Kagdana</div>
+      <div class="school-sub">Education Department, Haryana &nbsp;•&nbsp; Sirsa District</div>
+    </div>
+    <div class="header-badges"><span class="badge">Est. 1985</span></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner container">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="teachers.html">Teachers</a></li>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="results.html">Results</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner container">
+    <span class="ticker-label">📢 Notice</span>
+    <div style="overflow:hidden;flex:1"><p class="ticker-text" id="tickerText">Loading...</p></div>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>📊 Annual Examination Results</h1>
+    <p>Search your result by Roll Number, Name or SRN — or browse class-wise results</p>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+
+    <div class="tabs">
+      <div class="tab active" data-tab="search">🔍 Search My Result</div>
+      <div class="tab" data-tab="classwise">📋 Class-wise Results</div>
+    </div>
+
+    <!-- TAB: SEARCH -->
+    <div class="tab-content active" id="tab-search">
+      <div class="search-box">
+        <h2>🔍 Find Your Result</h2>
+        <p>Enter your Roll Number, Name, or School Registration Number (SRN)</p>
+        <div class="form-group">
+          <input type="text" class="form-control" id="searchInput" placeholder="Roll No / Name / SRN..." style="font-size:1rem;padding:14px 18px" />
+        </div>
+        <div class="form-group">
+          <select class="form-control" id="yearFilter">
+            <option value="">All Years</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px" onclick="searchResult()">🔍 Search Result</button>
+      </div>
+
+      <div id="resultOutput"></div>
+    </div>
+
+    <!-- TAB: CLASS-WISE -->
+    <div class="tab-content" id="tab-classwise">
+      <div style="display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;align-items:center">
+        <div class="class-filter" id="classFilter"></div>
+        <select class="form-control" id="classYearFilter" style="max-width:160px" onchange="renderClassTable()">
+          <option value="">All Years</option>
+        </select>
+      </div>
+      <div id="classTable"></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col"><h4>🏫 School Info</h4><p class="footer-address">Govt. Girls High School Kagdana<br>Village Kagdana, Tehsil Dabwali<br>Sirsa, Haryana – 125104</p></div>
+      <div class="footer-col"><h4>🔗 Quick Links</h4><ul>
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About School</a></li>
+        <li><a href="teachers.html">Faculty</a></li><li><a href="gallery.html">Gallery</a></li>
+        <li><a href="results.html">Results</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>📞 Contact</h4><p class="footer-contact-info">📧 gghs.kagdana@gmail.com<br>📍 Village Kagdana, Sirsa<br>🕐 Mon – Sat: 8:00 AM – 2:00 PM</p></div>
+      <div class="footer-col"><h4>🏛️ Education Dept.</h4><p>Under Haryana Education Department<br>Block Resource Centre: Dabwali<br>District: Sirsa</p></div>
+    </div>
+  </div>
+  <div class="footer-bar"><div class="container">© 2024 Govt. Girls High School Kagdana. All Rights Reserved.</div></div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+    if (t.dataset.tab === 'classwise') renderClassTable();
+  });
+});
+
+// Populate year filters
+function populateYearFilters() {
+  const results = DB.get('results', []);
+  const years = [...new Set(results.map(r => r.year).filter(Boolean))].sort().reverse();
+  ['yearFilter','classYearFilter'].forEach(id => {
+    const sel = document.getElementById(id);
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">All Years</option>' + years.map(y => `<option value="${y}">${y}</option>`).join('');
+    sel.value = cur;
+  });
+}
+
+// Search
+function searchResult() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const yr = document.getElementById('yearFilter').value;
+  const out = document.getElementById('resultOutput');
+  if (!q) { out.innerHTML = '<div class="alert alert-info">Please enter a Roll No, Name, or SRN to search.</div>'; return; }
+
+  let results = DB.get('results', []);
+  if (yr) results = results.filter(r => r.year === yr);
+  const found = results.filter(r =>
+    String(r.rollNo).toLowerCase() === q ||
+    r.name.toLowerCase().includes(q) ||
+    (r.srn && String(r.srn).toLowerCase() === q)
+  );
+
+  if (!found.length) {
+    out.innerHTML = `<div class="no-result"><div class="icon">🔍</div><h3 style="color:var(--maroon);font-family:'Cormorant Garamond',serif">No Result Found</h3><p style="color:var(--gray-500);margin-top:8px">No record found for "<strong>${q}</strong>". Please check your Roll No or Name and try again.</p></div>`;
+    return;
+  }
+
+  out.innerHTML = found.map(r => buildResultCard(r)).join('<br>');
+}
+
+document.getElementById('searchInput').addEventListener('keyup', e => { if (e.key === 'Enter') searchResult(); });
+
+function buildResultCard(r) {
+  const subs = r.subjects || {};
+  let totalMax = 0, totalObt = 0;
+  const subRows = Object.entries(subs).map(([name, v]) => {
+    const mx = Number(v.max)||100, ob = Number(v.obt)||0;
+    totalMax += mx; totalObt += ob;
+    const pass = ob >= (mx * 0.33);
+    return `<tr>
+      <td>${name}</td>
+      <td>${mx}</td>
+      <td>${ob}</td>
+      <td><span class="grade-badge ${pass ? 'grade-A' : 'grade-F'}">${pass ? 'Pass' : 'Fail'}</span></td>
+    </tr>`;
+  }).join('');
+  const pct = totalMax ? (totalObt / totalMax * 100).toFixed(1) : 0;
+  const grade = getGrade(Number(pct));
+  const isPass = Number(pct) >= 33;
+
+  return `
+  <div class="result-card" style="margin-bottom:28px">
+    <div class="result-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <h2>${r.name}</h2>
+        <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+      </div>
+      <div class="result-meta">
+        <div class="meta-item"><div class="lbl">Roll Number</div><div class="val">${r.rollNo}</div></div>
+        ${r.srn ? `<div class="meta-item"><div class="lbl">SRN</div><div class="val">${r.srn}</div></div>` : ''}
+        <div class="meta-item"><div class="lbl">Class</div><div class="val">Class ${r.class}${r.section?' ('+r.section+')':''}</div></div>
+        <div class="meta-item"><div class="lbl">Exam Year</div><div class="val">${r.year}</div></div>
+        ${r.dob ? `<div class="meta-item"><div class="lbl">Date of Birth</div><div class="val">${r.dob}</div></div>` : ''}
+        ${r.fatherName ? `<div class="meta-item"><div class="lbl">Father's Name</div><div class="val">${r.fatherName}</div></div>` : ''}
+        ${r.motherName ? `<div class="meta-item"><div class="lbl">Mother's Name</div><div class="val">${r.motherName}</div></div>` : ''}
+        ${r.position ? `<div class="meta-item"><div class="lbl">Class Rank</div><div class="val">${r.position}</div></div>` : ''}
+      </div>
+    </div>
+    <div class="result-body">
+      <div class="table-wrap">
+        <table class="sub-table">
+          <thead><tr><th>Subject</th><th>Max Marks</th><th>Marks Obtained</th><th>Status</th></tr></thead>
+          <tbody>${subRows || '<tr><td colspan="4" style="text-align:center;color:var(--gray-500)">No subject data</td></tr>'}</tbody>
+        </table>
+      </div>
+      <div class="result-summary">
+        <div class="sum-box"><div class="num">${totalObt}/${totalMax}</div><div class="lbl">Total Marks</div></div>
+        <div class="sum-box"><div class="num">${pct}%</div><div class="lbl">Percentage</div></div>
+        <div class="sum-box"><div class="num">${grade}</div><div class="lbl">Grade</div></div>
+        <div class="sum-box ${isPass ? 'pass' : 'fail'}"><div class="num">${isPass ? '✅ Pass' : '❌ Fail'}</div><div class="lbl">Result</div></div>
+      </div>
+      ${r.remarks ? `<div style="margin-top:16px;background:var(--gold-pale);padding:12px 16px;border-radius:var(--radius-sm)"><strong style="color:var(--maroon)">Remarks:</strong> ${r.remarks}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+// Class-wise
+let selectedClass = '';
+function renderClassTable() {
+  const results = DB.get('results', []);
+  const yr = document.getElementById('classYearFilter').value;
+  const classes = [...new Set(results.map(r => r.class).filter(Boolean))].sort();
+
+  const cfEl = document.getElementById('classFilter');
+  if (!selectedClass && classes.length) selectedClass = classes[0];
+  cfEl.innerHTML = classes.map(c =>
+    `<button class="cf-btn ${c === selectedClass ? 'active' : ''}" onclick="selectClass('${c}')">${c}</button>`
+  ).join('');
+
+  let data = results.filter(r => r.class === selectedClass);
+  if (yr) data = data.filter(r => r.year === yr);
+
+  const el = document.getElementById('classTable');
+  if (!classes.length) { el.innerHTML = '<div class="alert alert-info">No results uploaded yet.</div>'; return; }
+  if (!data.length) { el.innerHTML = '<div class="alert alert-info">No results for selected class/year.</div>'; return; }
+
+  el.innerHTML = `
+    <div class="table-wrap" style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Roll No</th><th>SRN</th><th>Name</th><th>Father</th><th>Mother</th><th>DOB</th><th>Total</th><th>%</th><th>Grade</th><th>Result</th>
+        </tr></thead>
+        <tbody>
+          ${data.map((r, i) => {
+            let mx=0, ob=0;
+            Object.values(r.subjects||{}).forEach(v=>{mx+=Number(v.max||100);ob+=Number(v.obt||0);});
+            const pct = mx ? (ob/mx*100).toFixed(1) : 0;
+            const grade = getGrade(Number(pct));
+            const pass = Number(pct) >= 33;
+            return `<tr>
+              <td>${i+1}</td>
+              <td>${r.rollNo}</td>
+              <td>${r.srn||'—'}</td>
+              <td style="font-weight:700">${r.name}</td>
+              <td>${r.fatherName||'—'}</td>
+              <td>${r.motherName||'—'}</td>
+              <td>${r.dob||'—'}</td>
+              <td>${ob}/${mx}</td>
+              <td>${pct}%</td>
+              <td><span class="grade-badge ${gradeClass(grade)}">${grade}</span></td>
+              <td><span style="font-weight:700;color:${pass?'#28a745':'#dc3545'}">${pass?'Pass':'Fail'}</span></td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:.8rem;color:var(--gray-500)">${data.length} student(s) in Class ${selectedClass}</div>`;
+}
+
+function selectClass(cls) {
+  selectedClass = cls;
+  renderClassTable();
+}
+
+// Init
+populateYearFilters();
+renderClassTable();
+</script>
+</body>
+</html>

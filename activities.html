@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activities – Govt Girls High School Kagdana</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .act-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; transition:all var(--transition); display:flex; flex-direction:column; }
+    .act-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+    .act-img { height:200px; background:linear-gradient(135deg,var(--maroon),var(--maroon-lt)); display:flex; align-items:center; justify-content:center; font-size:4rem; position:relative; overflow:hidden; }
+    .act-img img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+    .act-body { padding:20px; flex:1; }
+    .act-meta { display:flex; gap:10px; align-items:center; margin-bottom:10px; flex-wrap:wrap; }
+    .act-date { font-size:.75rem; font-weight:700; color:var(--gray-500); }
+    .act-title { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--maroon); margin-bottom:8px; }
+    .act-desc { font-size:.88rem; color:var(--gray-700); line-height:1.6; }
+    .filter-bar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px; }
+    .filter-btn { padding:8px 20px; border-radius:99px; font-size:.8rem; font-weight:700; border:2px solid var(--maroon); background:transparent; color:var(--maroon); cursor:pointer; transition:all var(--transition); font-family:'Nunito',sans-serif; }
+    .filter-btn.active, .filter-btn:hover { background:var(--maroon); color:var(--white); }
+    .empty-state { text-align:center; padding:80px 20px; color:var(--gray-500); }
+    .empty-state .icon { font-size:4rem; margin-bottom:16px; }
+    .empty-state p { font-size:1rem; }
+    .empty-state small { font-size:.85rem; color:var(--gray-500); }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <span class="topbar-address">📍 Village Kagdana, Tehsil Dabwali, Sirsa, Haryana – 125104</span>
+    <span><span class="topbar-contact"></span> &nbsp;|&nbsp; <a href="admin.html">🔐 Admin</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner container">
+    <div class="school-logo">🏫</div>
+    <div class="school-info">
+      <div class="school-name">Govt. Girls High School Kagdana</div>
+      <div class="school-sub">Education Department, Haryana &nbsp;•&nbsp; Sirsa District</div>
+    </div>
+    <div class="header-badges"><span class="badge">Est. 1985</span><span class="badge">Class VI–X</span></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner container">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="teachers.html">Teachers</a></li>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner container">
+    <span class="ticker-label">📢 Notice</span>
+    <div style="overflow:hidden;flex:1"><p class="ticker-text" id="tickerText">Loading...</p></div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <h1>📸 School Activities</h1>
+    <p>Recent Events, Celebrations &amp; School News</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div class="container">
+
+    <!-- FILTER -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-cat="all">All Activities</button>
+      <button class="filter-btn" data-cat="Academic">Academic</button>
+      <button class="filter-btn" data-cat="Sports">Sports</button>
+      <button class="filter-btn" data-cat="Cultural">Cultural</button>
+      <button class="filter-btn" data-cat="Notice">Notice</button>
+      <button class="filter-btn" data-cat="Event">Event</button>
+    </div>
+
+    <!-- CARDS -->
+    <div id="actGrid" class="grid-3"></div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col"><h4>🏫 School Info</h4><p>Govt. Girls High School Kagdana<br>Village Kagdana, Tehsil Dabwali<br>Sirsa, Haryana – 125104</p></div>
+      <div class="footer-col"><h4>🔗 Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="teachers.html">Faculty</a></li><li><a href="results.html">Results</a></li>
+      <li><a href="gallery.html">Gallery</a></li><li><a href="admin.html">Admin</a></li></ul></div>
+      <div class="footer-col"><h4>📞 Contact</h4><p>📧 gghs.kagdana@gmail.com<br>🕐 Mon–Sat: 8:00 AM – 2:00 PM</p></div>
+    </div>
+  </div>
+  <div class="footer-bar"><div class="container">© 2024 Govt. Girls High School Kagdana, Sirsa.</div></div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+const ICONS = { Academic:'📚', Sports:'⚽', Cultural:'🎭', Notice:'📢', Event:'🎉', Other:'📌' };
+
+let allActivities = [];
+let currentCat = 'all';
+
+function renderActivities(acts) {
+  const grid = document.getElementById('actGrid');
+  if (!acts.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="icon">📭</div>
+      <p>No activities posted yet.</p>
+      <small>Activities will appear here once the admin posts them.</small>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = acts.map(a => `
+    <div class="act-card" data-cat="${a.category||'Other'}">
+      <div class="act-img">
+        ${a.image ? `<img src="${a.image}" alt="${a.title}" />` : ''}
+        <span style="position:relative;z-index:1;${a.image?'display:none':''}">${ICONS[a.category]||'📌'}</span>
+      </div>
+      <div class="act-body">
+        <div class="act-meta">
+          <span class="tag tag-maroon">${a.category||'General'}</span>
+          <span class="act-date">📅 ${new Date(a.date).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</span>
+        </div>
+        <div class="act-title">${a.title}</div>
+        <div class="act-desc">${a.description}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function applyFilter(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  const filtered = cat === 'all' ? allActivities : allActivities.filter(a => (a.category||'Other') === cat);
+  renderActivities(filtered);
+}
+
+document.getElementById('filterBar').addEventListener('click', e => {
+  if (e.target.classList.contains('filter-btn')) applyFilter(e.target.dataset.cat);
+});
+
+allActivities = DB.get('activities', []).sort((a,b) => new Date(b.date)-new Date(a.date));
+renderActivities(allActivities);
+</script>
+</body>
+</html>

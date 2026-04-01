@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teachers – Govt Girls High School Kagdana</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .teacher-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; text-align:center; transition:all var(--transition); }
+    .teacher-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .tc-header { background:linear-gradient(135deg,var(--maroon),var(--maroon-lt)); padding:32px 20px 50px; position:relative; }
+    .tc-avatar { width:90px; height:90px; border-radius:50%; background:var(--gold-pale); display:flex; align-items:center; justify-content:center; font-size:2.8rem; margin:0 auto; border:4px solid var(--white); box-shadow:0 4px 16px rgba(0,0,0,.15); position:relative; z-index:1; overflow:hidden; }
+    .tc-avatar img { width:100%; height:100%; object-fit:cover; }
+    .tc-body { padding:16px 20px 24px; margin-top:-20px; }
+    .tc-name { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--maroon); margin-bottom:4px; }
+    .tc-desig { font-size:.8rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px; }
+    .tc-info { display:flex; flex-direction:column; gap:6px; text-align:left; font-size:.82rem; }
+    .tc-info-row { display:flex; gap:8px; align-items:flex-start; }
+    .tc-info-row span:first-child { flex-shrink:0; }
+    .tc-info-row span:last-child { color:var(--gray-700); }
+    .head-tag { position:absolute; top:12px; right:12px; background:var(--gold); color:var(--white); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:99px; }
+    .empty-state { text-align:center; padding:80px 20px; color:var(--gray-500); }
+    .search-bar { display:flex; gap:12px; margin-bottom:32px; }
+    .search-bar input { flex:1; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-inner">
+    <span class="topbar-address">📍 Village Kagdana, Tehsil Dabwali, Sirsa, Haryana – 125104</span>
+    <span><span class="topbar-contact"></span> &nbsp;|&nbsp; <a href="admin.html">🔐 Admin</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner container">
+    <div class="school-logo">🏫</div>
+    <div class="school-info">
+      <div class="school-name">Govt. Girls High School Kagdana</div>
+      <div class="school-sub">Education Department, Haryana &nbsp;•&nbsp; Sirsa District</div>
+    </div>
+    <div class="header-badges"><span class="badge">Est. 1985</span></div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner container">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="teachers.html">Teachers</a></li>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner container">
+    <span class="ticker-label">📢 Notice</span>
+    <div style="overflow:hidden;flex:1"><p class="ticker-text" id="tickerText">Loading...</p></div>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>👩‍🏫 Our Faculty</h1>
+    <p>Meet the dedicated educators of GGHS Kagdana</p>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+
+    <!-- SEARCH -->
+    <div class="search-bar">
+      <input type="text" class="form-control" id="teacherSearch" placeholder="🔍 Search teachers by name or subject..." oninput="filterTeachers()" />
+    </div>
+
+    <!-- PRINCIPAL SPOTLIGHT (if exists) -->
+    <div id="principalSpot" class="hidden" style="margin-bottom:36px"></div>
+
+    <!-- GRID -->
+    <div id="teacherGrid" class="grid-4"></div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col"><h4>🏫 School Info</h4><p>Govt. Girls High School Kagdana<br>Village Kagdana, Tehsil Dabwali<br>Sirsa, Haryana – 125104</p></div>
+      <div class="footer-col"><h4>🔗 Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="activities.html">Activities</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="results.html">Results</a></li>
+      <li><a href="gallery.html">Gallery</a></li><li><a href="admin.html">Admin</a></li></ul></div>
+      <div class="footer-col"><h4>📞 Contact</h4><p>📧 gghs.kagdana@gmail.com<br>🕐 Mon–Sat: 8:00 AM – 2:00 PM</p></div>
+    </div>
+  </div>
+  <div class="footer-bar"><div class="container">© 2024 Govt. Girls High School Kagdana, Sirsa.</div></div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+let allTeachers = [];
+
+function teacherCard(t) {
+  const isHead = t.designation && (t.designation.toLowerCase().includes('principal') || t.designation.toLowerCase().includes('head'));
+  return `
+    <div class="teacher-card">
+      <div class="tc-header">
+        ${isHead ? '<span class="head-tag">⭐ Head</span>' : ''}
+        <div class="tc-avatar">
+          ${t.photo ? `<img src="${t.photo}" alt="${t.name}" />` : '👩‍🏫'}
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">${t.name}</div>
+        <div class="tc-desig">${t.designation||'Teacher'}</div>
+        <div class="tc-info">
+          ${t.subject ? `<div class="tc-info-row"><span>📖</span><span>${t.subject}</span></div>` : ''}
+          ${t.qualification ? `<div class="tc-info-row"><span>🎓</span><span>${t.qualification}</span></div>` : ''}
+          ${t.experience ? `<div class="tc-info-row"><span>⏱️</span><span>${t.experience} yrs exp.</span></div>` : ''}
+          ${t.phone ? `<div class="tc-info-row"><span>📞</span><span>${t.phone}</span></div>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderTeachers(teachers) {
+  const grid = document.getElementById('teacherGrid');
+  if (!teachers.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div style="font-size:3rem;margin-bottom:16px">👩‍🏫</div>
+      <p>No teacher profiles added yet.</p>
+      <small>Teacher profiles will appear here once updated by the admin.</small>
+    </div>`;
+    return;
+  }
+  const head = teachers.filter(t => t.designation && (t.designation.toLowerCase().includes('principal') || t.designation.toLowerCase().includes('head')));
+  const others = teachers.filter(t => !(t.designation && (t.designation.toLowerCase().includes('principal') || t.designation.toLowerCase().includes('head'))));
+
+  // Principal spotlight
+  const ps = document.getElementById('principalSpot');
+  if (head.length) {
+    ps.classList.remove('hidden');
+    ps.innerHTML = `
+      <div style="background:linear-gradient(135deg,var(--maroon-dk),var(--maroon));border-radius:var(--radius);padding:32px;color:var(--white);display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+        <div style="width:100px;height:100px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:3rem;border:4px solid var(--gold);flex-shrink:0;overflow:hidden">
+          ${head[0].photo ? `<img src="${head[0].photo}" style="width:100%;height:100%;object-fit:cover" />` : '👩‍🏫'}
+        </div>
+        <div>
+          <div style="font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:6px">School Head / Principal</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700">${head[0].name}</div>
+          <div style="color:var(--gold-lt);font-weight:600;margin-top:4px">${head[0].designation} ${head[0].subject?'· '+head[0].subject:''}</div>
+          ${head[0].qualification ? `<div style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:4px">🎓 ${head[0].qualification}</div>` : ''}
+          ${head[0].experience ? `<div style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:2px">⏱️ ${head[0].experience} years of experience</div>` : ''}
+        </div>
+      </div>`;
+  } else { ps.classList.add('hidden'); }
+
+  grid.innerHTML = others.map(teacherCard).join('');
+}
+
+function filterTeachers() {
+  const q = document.getElementById('teacherSearch').value.toLowerCase();
+  const filtered = allTeachers.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    (t.subject||'').toLowerCase().includes(q) ||
+    (t.designation||'').toLowerCase().includes(q)
+  );
+  renderTeachers(filtered);
+}
+
+allTeachers = DB.get('teachers', []);
+renderTeachers(allTeachers);
+</script>
+</body>
+</html>

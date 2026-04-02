@@ -10,93 +10,101 @@
     body { background: #f0f0f4; }
 
     /* LOGIN */
-    .login-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--maroon-dk),var(--maroon),var(--maroon-lt)); padding:24px; }
-    .login-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-lg); padding:40px; width:100%; max-width:400px; }
-    .login-box h2 { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--maroon); text-align:center; margin-bottom:6px; }
-    .login-box p { text-align:center; color:var(--gray-500); font-size:.88rem; margin-bottom:28px; }
-    .login-logo { font-size:4rem; text-align:center; margin-bottom:16px; }
+    .login-wrap { min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--maroon-dk),var(--maroon),var(--maroon-lt));padding:24px; }
+    .login-box { background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:40px;width:100%;max-width:400px; }
+    .login-box h2 { font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--maroon);text-align:center;margin-bottom:6px; }
+    .login-box p { text-align:center;color:var(--gray-500);font-size:.88rem;margin-bottom:28px; }
+    .login-logo { font-size:4rem;text-align:center;margin-bottom:16px; }
 
     /* LAYOUT */
-    .admin-layout { display:flex; min-height:100vh; }
-    .sidebar { width:240px; background:var(--maroon-dk); flex-shrink:0; display:flex; flex-direction:column; }
-    .sidebar-logo { padding:24px 20px; border-bottom:1px solid rgba(255,255,255,.1); }
-    .sidebar-logo .name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--white); font-weight:700; line-height:1.3; }
-    .sidebar-logo .sub { font-size:.7rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-top:2px; }
-    .sidebar-nav { flex:1; padding:16px 0; }
-    .s-nav-item { display:flex; align-items:center; gap:12px; padding:13px 20px; color:rgba(255,255,255,.65); font-size:.85rem; font-weight:700; cursor:pointer; transition:all .2s; border-left:3px solid transparent; }
-    .s-nav-item:hover { color:var(--white); background:rgba(255,255,255,.06); }
-    .s-nav-item.active { color:var(--white); background:rgba(201,149,10,.15); border-left-color:var(--gold); }
-    .s-nav-item .icon { font-size:1.1rem; width:24px; text-align:center; }
-    .sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,.1); }
-
-    .admin-main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
-    .admin-topbar { background:var(--white); padding:14px 28px; border-bottom:1px solid var(--gray-200); display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.04); }
-    .admin-topbar h1 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--maroon); }
-    .admin-content { flex:1; overflow-y:auto; padding:28px; }
+    .admin-layout { display:flex;min-height:100vh; }
+    .sidebar { width:240px;background:var(--maroon-dk);flex-shrink:0;display:flex;flex-direction:column; }
+    .sidebar-logo { padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.1); }
+    .sidebar-logo .name { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);font-weight:700;line-height:1.3; }
+    .sidebar-logo .sub { font-size:.7rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-top:2px; }
+    .sidebar-nav { flex:1;padding:16px 0; }
+    .s-nav-item { display:flex;align-items:center;gap:12px;padding:13px 20px;color:rgba(255,255,255,.65);font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;border-left:3px solid transparent; }
+    .s-nav-item:hover { color:var(--white);background:rgba(255,255,255,.06); }
+    .s-nav-item.active { color:var(--white);background:rgba(201,149,10,.15);border-left-color:var(--gold); }
+    .s-nav-item .icon { font-size:1.1rem;width:24px;text-align:center; }
+    .sidebar-footer { padding:16px 20px;border-top:1px solid rgba(255,255,255,.1); }
+    .admin-main { flex:1;display:flex;flex-direction:column;overflow:hidden; }
+    .admin-topbar { background:var(--white);padding:14px 28px;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.04); }
+    .admin-topbar h1 { font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--maroon); }
+    .admin-content { flex:1;overflow-y:auto;padding:28px; }
 
     /* PANELS */
     .panel { display:none; }
     .panel.active { display:block; }
 
-    /* DASHBOARD CARDS */
-    .dash-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:20px; margin-bottom:32px; }
-    .dash-card { background:var(--white); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); }
-    .dash-card .dc-num { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:700; color:var(--maroon); }
-    .dash-card .dc-lbl { font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gray-500); margin-top:4px; }
-    .dash-card .dc-icon { font-size:1.8rem; margin-bottom:8px; }
+    /* DASHBOARD */
+    .dash-cards { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-bottom:32px; }
+    .dash-card { background:var(--white);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow); }
+    .dash-card .dc-num { font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--maroon); }
+    .dash-card .dc-lbl { font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-500);margin-top:4px; }
+    .dash-card .dc-icon { font-size:1.8rem;margin-bottom:8px; }
 
-    /* EXCEL UPLOAD */
-    .upload-zone { border:3px dashed var(--maroon); border-radius:var(--radius); padding:48px; text-align:center; cursor:pointer; transition:all .2s; background:var(--white); }
-    .upload-zone:hover, .upload-zone.over { background:var(--gold-pale); border-color:var(--gold); }
-    .upload-zone .uz-icon { font-size:4rem; margin-bottom:16px; }
-    .upload-zone h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--maroon); margin-bottom:8px; }
-    .upload-zone p { color:var(--gray-500); font-size:.88rem; }
-    .preview-table-wrap { overflow-x:auto; max-height:400px; border-radius:var(--radius-sm); border:1px solid var(--gray-200); }
-    .step-badge { background:var(--maroon); color:var(--white); width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:800; flex-shrink:0; }
-    .step-box { display:flex; gap:14px; margin-bottom:24px; align-items:flex-start; }
-    .step-content h4 { font-weight:800; font-size:.9rem; margin-bottom:4px; }
-    .step-content p { font-size:.82rem; color:var(--gray-700); }
-    .template-btn { display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--white); padding:8px 20px; border-radius:8px; font-size:.82rem; font-weight:700; cursor:pointer; border:none; font-family:'Nunito',sans-serif; }
+    /* UPLOAD */
+    .upload-zone { border:3px dashed var(--maroon);border-radius:var(--radius);padding:48px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white); }
+    .upload-zone:hover,.upload-zone.over { background:var(--gold-pale);border-color:var(--gold); }
+    .upload-zone .uz-icon { font-size:4rem;margin-bottom:16px; }
+    .upload-zone h3 { font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--maroon);margin-bottom:8px; }
+    .upload-zone p { color:var(--gray-500);font-size:.88rem; }
+    .preview-table-wrap { overflow-x:auto;max-height:400px;border-radius:var(--radius-sm);border:1px solid var(--gray-200); }
+    .step-badge { background:var(--maroon);color:var(--white);width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0; }
+    .step-box { display:flex;gap:14px;margin-bottom:24px;align-items:flex-start; }
+    .step-content h4 { font-weight:800;font-size:.9rem;margin-bottom:4px; }
+    .step-content p { font-size:.82rem;color:var(--gray-700); }
+    .template-btn { display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--white);padding:8px 20px;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;border:none;font-family:'Nunito',sans-serif; }
 
-    /* ROW ITEMS */
-    .act-row { background:var(--white); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow); display:flex; gap:14px; align-items:flex-start; margin-bottom:12px; }
+    /* ROWS */
+    .act-row { background:var(--white);border-radius:var(--radius-sm);padding:16px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start;margin-bottom:12px; }
     .act-row .act-info { flex:1; }
-    .act-row .act-title-r { font-weight:700; color:var(--maroon); }
-    .act-row .act-meta-r { font-size:.78rem; color:var(--gray-500); margin-top:3px; }
-    .act-row .act-actions { display:flex; gap:8px; flex-shrink:0; }
-    .tc-row { background:var(--white); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow); display:flex; gap:14px; align-items:center; margin-bottom:12px; }
-    .tc-ava { width:52px; height:52px; border-radius:50%; background:var(--gold-pale); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0; overflow:hidden; }
-    .tc-ava img { width:100%; height:100%; object-fit:cover; }
+    .act-row .act-title-r { font-weight:700;color:var(--maroon); }
+    .act-row .act-meta-r { font-size:.78rem;color:var(--gray-500);margin-top:3px; }
+    .act-row .act-actions { display:flex;gap:8px;flex-shrink:0; }
+    .tc-row { background:var(--white);border-radius:var(--radius-sm);padding:16px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;margin-bottom:12px; }
+    .tc-ava { width:52px;height:52px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;overflow:hidden; }
+    .tc-ava img { width:100%;height:100%;object-fit:cover; }
     .tc-info-r { flex:1; }
-    .tc-name-r { font-weight:700; color:var(--maroon); }
-    .tc-sub-r { font-size:.78rem; color:var(--gray-500); margin-top:2px; }
-    .tc-actions { display:flex; gap:8px; }
+    .tc-name-r { font-weight:700;color:var(--maroon); }
+    .tc-sub-r { font-size:.78rem;color:var(--gray-500);margin-top:2px; }
+    .tc-actions { display:flex;gap:8px;flex-wrap:wrap; }
 
-    /* GALLERY ADMIN */
-    .gallery-admin-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-top:16px; }
-    .gallery-admin-card { background:var(--white); border-radius:var(--radius-sm); box-shadow:var(--shadow); overflow:hidden; }
-    .gac-img { height:140px; background:linear-gradient(135deg,var(--maroon),var(--maroon-lt)); display:flex; align-items:center; justify-content:center; font-size:3rem; position:relative; overflow:hidden; }
-    .gac-img img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+    /* GALLERY */
+    .gallery-admin-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px; }
+    .gallery-admin-card { background:var(--white);border-radius:var(--radius-sm);box-shadow:var(--shadow);overflow:hidden; }
+    .gac-img { height:140px;background:linear-gradient(135deg,var(--maroon),var(--maroon-lt));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden; }
+    .gac-img img { width:100%;height:100%;object-fit:cover;position:absolute;inset:0; }
     .gac-body { padding:12px; }
-    .gac-title { font-weight:700; font-size:.88rem; color:var(--maroon); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .gac-meta { font-size:.72rem; color:var(--gray-500); }
-    .gac-actions { display:flex; gap:6px; margin-top:10px; }
+    .gac-title { font-weight:700;font-size:.88rem;color:var(--maroon);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .gac-meta { font-size:.72rem;color:var(--gray-500); }
+    .gac-actions { display:flex;gap:6px;margin-top:10px; }
 
-    /* LOGO PREVIEW */
-    .logo-preview { width:120px; height:120px; border-radius:50%; background:var(--gold-pale); border:4px solid var(--gold); display:flex; align-items:center; justify-content:center; font-size:3.5rem; overflow:hidden; margin:0 auto 16px; }
-    .logo-preview img { width:100%; height:100%; object-fit:contain; border-radius:50%; }
+    /* SETTINGS */
+    .logo-preview { width:120px;height:120px;border-radius:50%;background:var(--gold-pale);border:4px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:3.5rem;overflow:hidden;margin:0 auto 16px; }
+    .logo-preview img { width:100%;height:100%;object-fit:contain;border-radius:50%; }
+
+    /* PUBLISH BANNER */
+    .publish-banner { background:linear-gradient(135deg,#1a3a4a,#2a5a6a);color:#fff;border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap; }
+    .publish-banner .pb-text h3 { font-size:1rem;font-weight:800;margin-bottom:3px; }
+    .publish-banner .pb-text p { font-size:.8rem;color:rgba(255,255,255,.75); }
 
     /* SECTION CARD */
-    .sec-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; margin-bottom:28px; }
-    .sec-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--maroon); margin-bottom:16px; padding-bottom:12px; border-bottom:2px solid var(--gray-100); }
+    .sec-card { background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:28px; }
+    .sec-card h3 { font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--maroon);margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--gray-100); }
+
+    /* PHOTO PREVIEW */
+    .photo-preview-box { width:80px;height:80px;border-radius:50%;background:var(--gold-pale);border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;flex-shrink:0; }
+    .photo-preview-box img { width:100%;height:100%;object-fit:cover;border-radius:50%; }
 
     @media (max-width:768px) {
       .admin-layout { flex-direction:column; }
       .sidebar { width:100%; }
-      .sidebar-nav { display:flex; overflow-x:auto; padding:0; }
-      .s-nav-item { flex-direction:column; gap:4px; padding:12px 16px; font-size:.72rem; border-left:none; border-bottom:3px solid transparent; white-space:nowrap; }
-      .s-nav-item.active { border-left:none; border-bottom-color:var(--gold); }
-      .sidebar-footer, .sidebar-logo .sub { display:none; }
+      .sidebar-nav { display:flex;overflow-x:auto;padding:0; }
+      .s-nav-item { flex-direction:column;gap:4px;padding:12px 16px;font-size:.72rem;border-left:none;border-bottom:3px solid transparent;white-space:nowrap; }
+      .s-nav-item.active { border-left:none;border-bottom-color:var(--gold); }
+      .sidebar-footer,.sidebar-logo .sub { display:none; }
       .admin-content { padding:16px; }
     }
   </style>
@@ -118,7 +126,7 @@
       <div class="form-group">
         <label>Password</label>
         <input type="password" class="form-control" id="loginPass" placeholder="Enter password" />
-        <small style="color:var(--gray-500);font-size:.75rem">Default password: <strong>admin123</strong></small>
+        <small style="color:var(--gray-500);font-size:.75rem">Default: <strong>.....</strong></small>
       </div>
       <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doLogin()">🔓 Login</button>
       <div style="margin-top:16px;text-align:center"><a href="index.html" style="color:var(--gray-500);font-size:.82rem;text-decoration:none">← Back to Website</a></div>
@@ -158,6 +166,16 @@
     </div>
     <div class="admin-content">
 
+      <!-- PUBLISH BANNER (shown on all panels) -->
+      <div class="publish-banner">
+        <span style="font-size:2rem">🚀</span>
+        <div class="pb-text" style="flex:1">
+          <h3>Publish Changes to Website</h3>
+          <p>After editing, download <strong>data.json</strong> and commit it to your GitHub repo. All visitors will see the updated data instantly.</p>
+        </div>
+        <button class="btn btn-gold" onclick="downloadDataJson()" style="white-space:nowrap">📥 Download data.json</button>
+      </div>
+
       <!-- ===== DASHBOARD ===== -->
       <div class="panel active" id="panel-dashboard">
         <div class="dash-cards" id="dashCards"></div>
@@ -184,25 +202,25 @@
             <div class="step-badge">1</div>
             <div class="step-content">
               <h4>Download Excel Template</h4>
-              <p>Download the ready-made template with all required columns including SRN, Mother Name, and DOB.</p>
+              <p>Template includes: Roll No, SRN, Name, Class, Section, Father Name, Mother Name, DOB, Year, Subjects.</p>
               <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap">
                 <button class="template-btn" onclick="downloadTemplate()">📥 Download Template (.xlsx)</button>
-                <button class="btn btn-outline btn-sm" onclick="showFormatGuide()">📖 Column Guide</button>
+                <button class="btn btn-outline btn-sm" onclick="document.getElementById('formatGuide').classList.toggle('hidden')">📖 Column Guide</button>
               </div>
             </div>
           </div>
-
           <div id="formatGuide" class="hidden" style="background:var(--gold-pale);padding:16px;border-radius:8px;margin-bottom:16px;font-size:.83rem">
-            <strong style="color:var(--maroon)">Required & Optional Columns:</strong>
-            <div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px">
-              <div><code>RollNo</code> – Student roll number *</div>
-              <div><code>Name</code> – Full student name *</div>
-              <div><code>Class</code> – e.g. 6, 7, 8, 9, 10 *</div>
-              <div><code>SRN</code> – School Registration Number</div>
-              <div><code>Section</code> – e.g. A, B (optional)</div>
+            <strong style="color:var(--maroon)">Column Headers (use exact names):</strong>
+            <div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px">
+              <div><code>RollNo</code> – Roll number *</div>
+              <div><code>Name</code> – Student name *</div>
+              <div><code>Class</code> – 6, 7, 8, 9 or 10 *</div>
+              <div><code>SRN</code> – School Reg. Number</div>
+              <div><code>Section</code> – A or B (optional)</div>
               <div><code>FatherName</code> – Father's name</div>
               <div><code>MotherName</code> – Mother's name</div>
-              <div><code>DOB</code> – Date of birth (DD/MM/YYYY)</div>
+              <div><code>DOB</code> – DD/MM/YYYY</div>
+              <div><code>Mobile</code> – 10-digit mobile number</div>
               <div><code>Year</code> – Exam year e.g. 2024</div>
               <div><code>English_Max</code>, <code>English_Obt</code></div>
               <div><code>Hindi_Max</code>, <code>Hindi_Obt</code></div>
@@ -211,44 +229,40 @@
               <div><code>Social_Max</code>, <code>Social_Obt</code></div>
               <div><code>Sanskrit_Max</code>, <code>Sanskrit_Obt</code></div>
               <div><code>Computer_Max</code>, <code>Computer_Obt</code></div>
-              <div><code>Position</code> – Class rank (optional)</div>
+              <div><code>Position</code> – Rank (optional)</div>
               <div><code>Remarks</code> – (optional)</div>
             </div>
-            <p style="margin-top:10px;color:var(--maroon)"><strong>Tip:</strong> Add any subject using <code>SubjectName_Max</code> and <code>SubjectName_Obt</code></p>
+            <p style="margin-top:8px;color:var(--maroon)"><strong>Tip:</strong> Add any subject as <code>SubjectName_Max</code> and <code>SubjectName_Obt</code></p>
           </div>
-
           <div class="step-box">
             <div class="step-badge">2</div>
             <div class="step-content">
               <h4>Upload Your Excel File</h4>
-              <p>Fill the template and upload it here. Supports .xlsx and .xls formats.</p>
+              <p>Fill the template and upload it. Supports .xlsx and .xls formats.</p>
             </div>
           </div>
-          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('xlsxFile').click()" ondrop="handleDrop(event)" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')">
+          <div class="upload-zone" id="uploadZone"
+            onclick="document.getElementById('xlsxFile').click()"
+            ondrop="handleDrop(event)" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')">
             <div class="uz-icon">📊</div>
             <h3>Click or Drag Excel File Here</h3>
             <p>Supports .xlsx and .xls files</p>
             <input type="file" id="xlsxFile" accept=".xlsx,.xls" class="hidden" onchange="handleFile(event)" />
           </div>
           <div id="uploadMsg" style="margin-top:12px"></div>
-
           <div id="previewSection" class="hidden" style="margin-top:24px">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px">
               <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--maroon)">Preview (<span id="previewCount">0</span> students)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <div style="display:flex;gap:10px">
                 <button class="btn btn-outline btn-sm" onclick="clearPreview()">✕ Clear</button>
                 <button class="btn btn-primary" onclick="saveResults()">💾 Save to Database</button>
               </div>
             </div>
             <div class="preview-table-wrap">
-              <table id="previewTable">
-                <thead><tr id="previewHead"></tr></thead>
-                <tbody id="previewBody"></tbody>
-              </table>
+              <table id="previewTable"><thead><tr id="previewHead"></tr></thead><tbody id="previewBody"></tbody></table>
             </div>
           </div>
         </div>
-
         <div class="sec-card">
           <h3>🗃️ Manage Uploaded Results</h3>
           <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
@@ -275,16 +289,10 @@
             <div class="form-group">
               <label>Category / Event *</label>
               <select class="form-control" id="galCat">
-                <option>Sports Day</option>
-                <option>Republic Day</option>
-                <option>Independence Day</option>
-                <option>Cultural Programme</option>
-                <option>Science Exhibition</option>
-                <option>Prize Distribution</option>
-                <option>Teachers Day</option>
-                <option>Annual Function</option>
-                <option>Classroom Activities</option>
-                <option>Other</option>
+                <option>Sports Day</option><option>Republic Day</option><option>Independence Day</option>
+                <option>Cultural Programme</option><option>Science Exhibition</option>
+                <option>Prize Distribution</option><option>Teachers Day</option>
+                <option>Annual Function</option><option>Classroom Activities</option><option>Other</option>
               </select>
             </div>
           </div>
@@ -294,8 +302,11 @@
               <input type="date" class="form-control" id="galDate" />
             </div>
             <div class="form-group">
-              <label>Photo *</label>
-              <input type="file" class="form-control" id="galPhoto" accept="image/*" />
+              <label>Photo <span id="galPhotoLabel">(required for new)</span></label>
+              <input type="file" class="form-control" id="galPhoto" accept="image/*" onchange="previewGalPhoto(event)" />
+              <div style="margin-top:8px;display:none" id="galPhotoPreviewWrap">
+                <img id="galPhotoPreview" style="max-height:80px;border-radius:6px;border:2px solid var(--gold)" />
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -308,7 +319,6 @@
             <button class="btn btn-outline" onclick="resetGalleryForm()">✕ Cancel</button>
           </div>
         </div>
-
         <div class="sec-card">
           <h3>🖼️ All Gallery Photos (<span id="galCount">0</span>)</h3>
           <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
@@ -325,7 +335,7 @@
         <div class="sec-card">
           <h3>➕ Add New Activity / Notice</h3>
           <div class="form-row">
-            <div class="form-group"><label>Activity Title *</label><input type="text" class="form-control" id="actTitle" placeholder="e.g. Annual Sports Day 2024" /></div>
+            <div class="form-group"><label>Title *</label><input type="text" class="form-control" id="actTitle" placeholder="e.g. Annual Sports Day 2024" /></div>
             <div class="form-group"><label>Category *</label>
               <select class="form-control" id="actCat">
                 <option>Academic</option><option>Sports</option><option>Cultural</option>
@@ -352,19 +362,39 @@
         <div class="sec-card">
           <h3 id="teacherFormTitle">➕ Add Teacher Profile</h3>
           <input type="hidden" id="editTeacherId" value="" />
+
+          <!-- Photo preview row -->
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;padding:14px;background:var(--gray-100);border-radius:var(--radius-sm)">
+            <div class="photo-preview-box" id="tcPhotoPreviewBox">👩‍🏫</div>
+            <div style="flex:1">
+              <label style="font-weight:700;font-size:.88rem;display:block;margin-bottom:6px">Profile Photo (optional)</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('tcPhoto').click()">📷 Upload Photo</button>
+                <button type="button" class="btn btn-danger btn-sm" id="tcRemovePhotoBtn" onclick="removeTeacherPhoto()" style="display:none">🗑️ Remove Photo</button>
+              </div>
+              <input type="file" id="tcPhoto" accept="image/*" class="hidden" onchange="previewTeacherPhoto(event)" />
+              <small style="color:var(--gray-500);font-size:.74rem;display:block;margin-top:4px">Square image recommended. JPG or PNG.</small>
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group"><label>Full Name *</label><input type="text" class="form-control" id="tcName" placeholder="Mrs. Sunita Sharma" /></div>
-            <div class="form-group"><label>Designation *</label>
+            <div class="form-group"><label>Post / Designation *</label>
               <select class="form-control" id="tcDesig">
-                <option>Headmistress / Principal</option>
+                <option>Headmaster / Headmistress</option>
                 <option>PGT (Post Graduate Teacher)</option>
                 <option>TGT (Trained Graduate Teacher)</option>
                 <option>JBT (Junior Basic Teacher)</option>
-                <option>Science Teacher</option><option>Maths Teacher</option>
-                <option>English Teacher</option><option>Hindi Teacher</option>
-                <option>Social Studies Teacher</option><option>Computer Teacher</option>
-                <option>Sanskrit Teacher</option><option>Art &amp; Craft Teacher</option>
-                <option>Physical Education</option><option>Other</option>
+                <option>Science Teacher</option>
+                <option>Maths Teacher</option>
+                <option>English Teacher</option>
+                <option>Hindi Teacher</option>
+                <option>Social Studies Teacher</option>
+                <option>Computer Teacher</option>
+                <option>Sanskrit Teacher</option>
+                <option>Art &amp; Craft Teacher</option>
+                <option>Physical Education Teacher</option>
+                <option>Other</option>
               </select>
             </div>
           </div>
@@ -376,16 +406,15 @@
             <div class="form-group"><label>Experience (years)</label><input type="number" class="form-control" id="tcExp" placeholder="10" /></div>
             <div class="form-group"><label>Phone (optional)</label><input type="text" class="form-control" id="tcPhone" placeholder="98XXXXXXXX" /></div>
           </div>
-          <div class="form-group"><label>Profile Photo (optional)</label><input type="file" class="form-control" id="tcPhoto" accept="image/*" /></div>
           <div id="tcMsg"></div>
-          <div style="display:flex;gap:10px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
             <button class="btn btn-primary" onclick="saveTeacher()">💾 Save Teacher</button>
             <button class="btn btn-outline" onclick="resetTeacherForm()">✕ Cancel</button>
           </div>
         </div>
         <div class="sec-card">
           <h3>👩‍🏫 All Teachers (<span id="tcCount">0</span>)</h3>
-          <div class="teacher-list" id="tcList"></div>
+          <div id="tcList"></div>
         </div>
       </div>
 
@@ -396,12 +425,12 @@
         <div class="sec-card" style="max-width:500px">
           <h3>🖼️ School Logo</h3>
           <div class="logo-preview" id="logoPreview">🏫</div>
-          <div style="text-align:center;margin-bottom:16px">
+          <div style="text-align:center;margin-bottom:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
             <button class="btn btn-outline btn-sm" onclick="document.getElementById('logoFile').click()">📷 Upload New Logo</button>
-            <button class="btn btn-danger btn-sm" onclick="removeLogo()" style="margin-left:8px">🗑️ Remove</button>
+            <button class="btn btn-danger btn-sm" onclick="removeLogo()">🗑️ Remove Logo</button>
             <input type="file" id="logoFile" accept="image/*" class="hidden" onchange="uploadLogo(event)" />
           </div>
-          <p style="font-size:.8rem;color:var(--gray-500);text-align:center">Recommended: Square image, PNG or JPG. Logo appears in page header.</p>
+          <p style="font-size:.8rem;color:var(--gray-500);text-align:center">Square PNG/JPG recommended. Appears in all page headers.</p>
         </div>
 
         <!-- CONTACT DETAILS -->
@@ -409,17 +438,11 @@
           <h3>📞 School Contact Details</h3>
           <div class="form-group">
             <label>School Address</label>
-            <textarea class="form-control" id="ctAddress" rows="2" placeholder="Village Kagdana, Tehsil Dabwali, Sirsa, Haryana – 125104"></textarea>
+            <textarea class="form-control" id="ctAddress" rows="2" placeholder="Village Kagdana, Sirsa, Haryana"></textarea>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Phone Number</label>
-              <input type="text" class="form-control" id="ctPhone" placeholder="01666-XXXXXX" />
-            </div>
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" class="form-control" id="ctEmail" placeholder="gghs.kagdana@gmail.com" />
-            </div>
+            <div class="form-group"><label>Phone Number</label><input type="text" class="form-control" id="ctPhone" placeholder="01666-XXXXXX" /></div>
+            <div class="form-group"><label>Email Address</label><input type="email" class="form-control" id="ctEmail" placeholder="gghs.kagdana@gmail.com" /></div>
           </div>
           <div class="form-group">
             <label>Office Hours</label>
@@ -429,7 +452,7 @@
           <button class="btn btn-primary" onclick="saveContact()">💾 Save Contact Info</button>
         </div>
 
-        <!-- CHANGE PASSWORD -->
+        <!-- PASSWORD -->
         <div class="sec-card" style="max-width:500px">
           <h3>🔒 Change Admin Password</h3>
           <div class="form-group"><label>Current Password</label><input type="password" class="form-control" id="curPass" /></div>
@@ -440,12 +463,18 @@
         </div>
 
         <!-- DATA MANAGEMENT -->
-        <div class="sec-card" style="max-width:500px">
+        <div class="sec-card" style="max-width:560px">
           <h3>🗂️ Data Management</h3>
-          <p style="font-size:.88rem;color:var(--gray-700);margin-bottom:16px">Export or import all school data stored in the browser.</p>
+          <div style="background:var(--gold-pale);padding:14px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:.85rem">
+            <strong style="color:var(--maroon)">How GitHub sync works:</strong><br>
+            1. Edit data in the admin panel<br>
+            2. Click <strong>"📥 Download data.json"</strong> (blue banner above)<br>
+            3. Go to your GitHub repo → click <code>data.json</code> → Edit → paste new content → Commit<br>
+            4. All website visitors will see the updated data automatically ✅
+          </div>
           <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <button class="btn btn-outline" onclick="exportData()">📤 Export All Data (JSON)</button>
-            <button class="btn btn-danger" onclick="importDataPrompt()">📥 Import Data (JSON)</button>
+            <button class="btn btn-primary" onclick="downloadDataJson()">📥 Download data.json</button>
+            <button class="btn btn-outline" onclick="importDataPrompt()">📤 Import data.json</button>
           </div>
         </div>
       </div>
@@ -459,7 +488,7 @@
 <script>
 // ============ AUTH ============
 const ADMIN_KEY = 'gghs_admin_pass';
-const DEFAULT_PASS = 'admin123';
+const DEFAULT_PASS = 'admin12345';
 function getPass() { return localStorage.getItem(ADMIN_KEY) || DEFAULT_PASS; }
 
 function doLogin() {
@@ -484,59 +513,48 @@ function doLogout() {
 
 // ============ PANEL SWITCHING ============
 const panelTitles = {
-  dashboard: '📊 Dashboard', results: '📋 Manage Results',
-  gallery: '🖼️ Photo Gallery', activities: '📸 Activities & Notices',
-  teachers: '👩‍🏫 Teacher Profiles', settings: '⚙️ Settings'
+  dashboard:'📊 Dashboard', results:'📋 Manage Results', gallery:'🖼️ Photo Gallery',
+  activities:'📸 Activities & Notices', teachers:'👩‍🏫 Teacher Profiles', settings:'⚙️ Settings'
 };
-
 function switchPanel(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.s-nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
   document.querySelector(`[data-panel="${id}"]`).classList.add('active');
   document.getElementById('panelTitle').textContent = panelTitles[id];
-  if (id === 'results') { renderResTable(); populateResClassFilter(); }
-  if (id === 'gallery') { renderGallery(); renderGalCatFilter(); }
-  if (id === 'dashboard') loadDashboard();
-  if (id === 'settings') loadSettingsForm();
+  if (id === 'results')    { renderResTable(); populateResClassFilter(); }
+  if (id === 'gallery')    { renderGallery(); renderGalCatFilter(); }
+  if (id === 'dashboard')  loadDashboard();
+  if (id === 'settings')   loadSettingsForm();
 }
-
-document.querySelectorAll('.s-nav-item').forEach(n => {
-  n.addEventListener('click', () => switchPanel(n.dataset.panel));
-});
+document.querySelectorAll('.s-nav-item').forEach(n => n.addEventListener('click', () => switchPanel(n.dataset.panel)));
 
 // ============ INIT ============
 function initAdmin() {
   document.getElementById('actDate').valueAsDate = new Date();
   document.getElementById('galDate').valueAsDate = new Date();
-  loadDashboard();
-  renderActivities();
-  renderTeachers();
-  renderResTable();
-  populateResClassFilter();
-  renderGallery();
-  loadSettingsForm();
+  loadDashboard(); renderActivities(); renderTeachers();
+  renderResTable(); populateResClassFilter();
+  renderGallery(); loadSettingsForm();
 }
 
 // ============ DASHBOARD ============
 function loadDashboard() {
-  const results = DB.get('results', []);
-  const teachers = DB.get('teachers', []);
+  const results    = DB.get('results', []);
+  const teachers   = DB.get('teachers', []);
   const activities = DB.get('activities', []);
-  const gallery = DB.get('gallery', []);
-  const uniqueStudents = new Set(results.map(r => r.rollNo)).size;
-
+  const gallery    = DB.get('gallery', []);
+  const students   = new Set(results.map(r => r.rollNo)).size;
   document.getElementById('dashCards').innerHTML = `
-    <div class="dash-card"><div class="dc-icon">👩‍🎓</div><div class="dc-num">${uniqueStudents}</div><div class="dc-lbl">Students in DB</div></div>
+    <div class="dash-card"><div class="dc-icon">👩‍🎓</div><div class="dc-num">${students}</div><div class="dc-lbl">Students in DB</div></div>
     <div class="dash-card"><div class="dc-icon">👩‍🏫</div><div class="dc-num">${teachers.length}</div><div class="dc-lbl">Teachers</div></div>
     <div class="dash-card"><div class="dc-icon">📌</div><div class="dc-num">${activities.length}</div><div class="dc-lbl">Activities</div></div>
     <div class="dash-card"><div class="dc-icon">🖼️</div><div class="dc-num">${gallery.length}</div><div class="dc-lbl">Gallery Photos</div></div>
-    <div class="dash-card"><div class="dc-icon">📋</div><div class="dc-num">${results.length}</div><div class="dc-lbl">Result Records</div></div>
-  `;
-
+    <div class="dash-card"><div class="dc-icon">📋</div><div class="dc-num">${results.length}</div><div class="dc-lbl">Result Records</div></div>`;
   const al = document.getElementById('dashActList');
-  if (!activities.length) { al.innerHTML = '<p style="color:var(--gray-500);font-size:.88rem">No activities yet.</p>'; return; }
-  al.innerHTML = activities.slice(0,5).map(a => `
+  const acts = activities.slice(0, 5);
+  if (!acts.length) { al.innerHTML = '<p style="color:var(--gray-500);font-size:.88rem">No activities yet.</p>'; return; }
+  al.innerHTML = acts.map(a => `
     <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray-100);align-items:center">
       <span style="font-size:1.4rem">${{Academic:'📚',Sports:'⚽',Cultural:'🎭',Notice:'📢',Event:'🎉'}[a.category]||'📌'}</span>
       <div style="flex:1"><div style="font-weight:700;font-size:.9rem">${a.title}</div>
@@ -544,32 +562,30 @@ function loadDashboard() {
     </div>`).join('');
 }
 
+// ============ PUBLISH: DOWNLOAD data.json ============
+function downloadDataJson() {
+  const logo = localStorage.getItem('school_logo') || '';
+  const data = {
+    results:    DB.get('results', []),
+    activities: DB.get('activities', []),
+    teachers:   DB.get('teachers', []),
+    gallery:    DB.get('gallery', []),
+    contact:    DB.get('school_contact', {}),
+    logo:       logo,
+    _note: 'Commit this file to your GitHub repo root to publish changes to all visitors.'
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'data.json';
+  a.click();
+  toast('data.json downloaded! Commit it to GitHub to publish.', 'success');
+}
+
 // ============ EXCEL UPLOAD ============
 let parsedResults = [];
-
-function showFormatGuide() { document.getElementById('formatGuide').classList.toggle('hidden'); }
-
-function downloadTemplate() {
-  const wb = XLSX.utils.book_new();
-  const headers = ['RollNo','Name','Class','SRN','Section','FatherName','MotherName','DOB','Year',
-    'English_Max','English_Obt','Hindi_Max','Hindi_Obt','Maths_Max','Maths_Obt',
-    'Science_Max','Science_Obt','Social_Max','Social_Obt','Sanskrit_Max','Sanskrit_Obt',
-    'Computer_Max','Computer_Obt','Position','Remarks'];
-  const sample = ['1001','Priya Sharma','9','SRN2024001','A','Ram Lal Sharma','Sunita Sharma','15/08/2009','2024',
-    '100','78','100','82','100','75','100','69','100','88','100','71','100','65','2','Good performance'];
-  const ws = XLSX.utils.aoa_to_sheet([headers, sample]);
-  ws['!cols'] = headers.map(() => ({wch:18}));
-  XLSX.utils.book_append_sheet(wb, ws, 'Results');
-  XLSX.writeFile(wb, 'GGHS_Result_Template.xlsx');
-}
-
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('uploadZone').classList.remove('over');
-  const f = e.dataTransfer.files[0];
-  if (f) processFile(f);
-}
-function handleFile(e) { const f = e.target.files[0]; if (f) processFile(f); }
+function handleDrop(e) { e.preventDefault(); document.getElementById('uploadZone').classList.remove('over'); const f = e.dataTransfer.files[0]; if(f) processFile(f); }
+function handleFile(e) { const f = e.target.files[0]; if(f) processFile(f); }
 
 function processFile(file) {
   const reader = new FileReader();
@@ -580,11 +596,9 @@ function processFile(file) {
       const data = XLSX.utils.sheet_to_json(ws, { defval:'' });
       if (!data.length) { showMsg('uploadMsg','Excel file is empty.','danger'); return; }
       parsedResults = parseExcelData(data);
-      showPreview(parsedResults, data);
-      showMsg('uploadMsg',`✅ Successfully read ${parsedResults.length} student records.`,'success');
-    } catch(err) {
-      showMsg('uploadMsg','❌ Error reading file: ' + err.message,'danger');
-    }
+      showPreview(parsedResults);
+      showMsg('uploadMsg', `✅ Read ${parsedResults.length} student records. Click "Save to Database" to save.`, 'success');
+    } catch(err) { showMsg('uploadMsg','❌ Error reading file: ' + err.message,'danger'); }
   };
   reader.readAsBinaryString(file);
 }
@@ -592,35 +606,50 @@ function processFile(file) {
 function parseExcelData(rows) {
   return rows.map(row => {
     const subjects = {};
-    const fixed = ['RollNo','Name','Class','SRN','Section','FatherName','MotherName','DOB','Year','Position','Remarks'];
+    const fixed = ['RollNo','Name','Class','SRN','Section','FatherName','MotherName','DOB','Mobile','Year','Position','Remarks'];
     Object.keys(row).forEach(k => {
       if (!fixed.includes(k)) {
         const parts = k.split('_');
         if (parts.length >= 2) {
-          const subName = parts.slice(0,-1).join(' ');
+          const sub = parts.slice(0,-1).join(' ');
           const type = parts[parts.length-1].toLowerCase();
-          if (!subjects[subName]) subjects[subName] = { max:100, obt:0 };
-          if (type === 'max') subjects[subName].max = Number(row[k])||100;
-          if (type === 'obt') subjects[subName].obt = Number(row[k])||0;
+          if (!subjects[sub]) subjects[sub] = { max:100, obt:0 };
+          if (type === 'max') subjects[sub].max = Number(row[k])||100;
+          if (type === 'obt') subjects[sub].obt = Number(row[k])||0;
         }
       }
     });
     return {
-      id: 'r_'+Date.now()+'_'+Math.random().toString(36).substr(2,6),
-      rollNo: String(row['RollNo']||'').trim(),
-      name: String(row['Name']||'').trim(),
-      class: String(row['Class']||'').trim(),
-      srn: String(row['SRN']||'').trim(),
-      section: String(row['Section']||'').trim(),
+      id: 'r_' + Date.now() + '_' + Math.random().toString(36).substr(2,6),
+      rollNo:     String(row['RollNo']||'').trim(),
+      name:       String(row['Name']||'').trim(),
+      class:      String(row['Class']||'').trim(),
+      srn:        String(row['SRN']||'').trim(),
+      section:    String(row['Section']||'').trim(),
       fatherName: String(row['FatherName']||'').trim(),
       motherName: String(row['MotherName']||'').trim(),
-      dob: String(row['DOB']||'').trim(),
-      year: String(row['Year']||'').trim(),
-      position: String(row['Position']||'').trim(),
-      remarks: String(row['Remarks']||'').trim(),
+      dob:        String(row['DOB']||'').trim(),
+      mobile:     String(row['Mobile']||'').trim().replace(/\D/g,''),
+      year:       String(row['Year']||'').trim(),
+      position:   String(row['Position']||'').trim(),
+      remarks:    String(row['Remarks']||'').trim(),
       subjects
     };
   }).filter(r => r.rollNo && r.name);
+}
+
+function downloadTemplate() {
+  const wb = XLSX.utils.book_new();
+  const headers = ['RollNo','Name','Class','SRN','Section','FatherName','MotherName','DOB','Mobile','Year',
+    'English_Max','English_Obt','Hindi_Max','Hindi_Obt','Maths_Max','Maths_Obt',
+    'Science_Max','Science_Obt','Social_Max','Social_Obt','Sanskrit_Max','Sanskrit_Obt',
+    'Computer_Max','Computer_Obt','Position','Remarks'];
+  const sample = ['1001','Priya Sharma','9','SRN2024001','A','Ram Lal Sharma','Sunita Sharma','15/08/2009','9812345678','2024',
+    '100','78','100','82','100','75','100','69','100','88','100','71','100','65','2','Good performance'];
+  const ws = XLSX.utils.aoa_to_sheet([headers, sample]);
+  ws['!cols'] = headers.map(() => ({wch:18}));
+  XLSX.utils.book_append_sheet(wb, ws, 'Results');
+  XLSX.writeFile(wb, 'GGHS_Result_Template.xlsx');
 }
 
 function showPreview(data) {
@@ -630,43 +659,34 @@ function showPreview(data) {
   const allSubs = new Set();
   data.forEach(r => Object.keys(r.subjects).forEach(s => allSubs.add(s)));
   document.getElementById('previewHead').innerHTML =
-    ['Roll No','SRN','Name','Class','Father','Mother','DOB','Year',...[...allSubs].map(s=>s+' (Obt)'),'Total','%']
+    ['Roll No','SRN','Name','Class','Father','Mother','DOB','Mobile','Year',...[...allSubs].map(s=>s+' (Obt)'),'Total','%']
     .map(h=>`<th>${h}</th>`).join('');
   document.getElementById('previewBody').innerHTML = data.map(r => {
     let max=0,obt=0;
     Object.values(r.subjects).forEach(v=>{max+=Number(v.max||100);obt+=Number(v.obt||0);});
-    const pct = max?(obt/max*100).toFixed(1):0;
-    return `<tr>
-      <td>${r.rollNo}</td><td>${r.srn||'—'}</td><td>${r.name}</td><td>${r.class}${r.section?' ('+r.section+')':''}</td>
-      <td>${r.fatherName||'—'}</td><td>${r.motherName||'—'}</td><td>${r.dob||'—'}</td><td>${r.year}</td>
+    const pct=max?(obt/max*100).toFixed(1):0;
+    return `<tr><td>${r.rollNo}</td><td>${r.srn||'—'}</td><td>${r.name}</td><td>${r.class}${r.section?' ('+r.section+')':''}</td>
+      <td>${r.fatherName||'—'}</td><td>${r.motherName||'—'}</td><td>${r.dob||'—'}</td><td>${r.mobile||'—'}</td><td>${r.year}</td>
       ${[...allSubs].map(s=>`<td>${r.subjects[s]?r.subjects[s].obt:'—'}</td>`).join('')}
-      <td>${obt}/${max}</td><td>${pct}%</td>
-    </tr>`;
+      <td>${obt}/${max}</td><td>${pct}%</td></tr>`;
   }).join('');
 }
 
-function clearPreview() {
-  parsedResults = [];
-  document.getElementById('previewSection').classList.add('hidden');
-  document.getElementById('xlsxFile').value = '';
-  document.getElementById('uploadMsg').innerHTML = '';
-}
+function clearPreview() { parsedResults=[]; document.getElementById('previewSection').classList.add('hidden'); document.getElementById('xlsxFile').value=''; document.getElementById('uploadMsg').innerHTML=''; }
 
 function saveResults() {
   if (!parsedResults.length) return;
   const existing = DB.get('results', []);
   const filtered = existing.filter(e => !parsedResults.some(n => n.rollNo===e.rollNo && n.year===e.year));
   DB.set('results', [...filtered, ...parsedResults]);
-  showMsg('uploadMsg', `✅ ${parsedResults.length} records saved!`, 'success');
+  showMsg('uploadMsg', `✅ ${parsedResults.length} records saved! Remember to download data.json and commit to GitHub.`, 'success');
   clearPreview(); populateResClassFilter(); renderResTable(); loadDashboard();
-  toast(`${parsedResults.length} results uploaded!`, 'success');
+  toast(`${parsedResults.length} results saved!`, 'success');
 }
 
 function clearAllResults() {
   if (!confirm('⚠️ This will delete ALL result records. Are you sure?')) return;
-  DB.set('results', []);
-  renderResTable(); populateResClassFilter(); loadDashboard();
-  toast('All results cleared.', 'info');
+  DB.set('results', []); renderResTable(); populateResClassFilter(); loadDashboard(); toast('All results cleared.','info');
 }
 
 function populateResClassFilter() {
@@ -678,31 +698,38 @@ function populateResClassFilter() {
 
 function renderResTable() {
   const all = DB.get('results', []);
-  const q = (document.getElementById('resSearch')||{value:''}).value.toLowerCase();
+  const q   = (document.getElementById('resSearch')||{value:''}).value.toLowerCase();
   const cls = (document.getElementById('resClassFilter')||{value:''}).value;
   let data = all;
-  if (q) data = data.filter(r => r.name.toLowerCase().includes(q) || String(r.rollNo).includes(q) || (r.srn||'').toLowerCase().includes(q));
+  if (q)   data = data.filter(r => r.name.toLowerCase().includes(q)||String(r.rollNo).includes(q)||(r.srn||'').toLowerCase().includes(q));
   if (cls) data = data.filter(r => r.class === cls);
   const el = document.getElementById('resTableWrap');
-  if (!data.length) { el.innerHTML = '<div class="alert alert-info">No results found.</div>'; return; }
+  if (!data.length) { el.innerHTML='<div class="alert alert-info">No results found.</div>'; return; }
   el.innerHTML = `<div class="table-wrap"><table>
-    <thead><tr><th>Roll No</th><th>SRN</th><th>Name</th><th>Class</th><th>Father</th><th>Mother</th><th>DOB</th><th>Year</th><th>%</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Roll No</th><th>SRN</th><th>Name</th><th>Class</th><th>Father</th><th>Mother</th><th>DOB</th><th>Mobile</th><th>Year</th><th>%</th><th>Actions</th></tr></thead>
     <tbody>${data.map(r => {
       let mx=0,ob=0; Object.values(r.subjects||{}).forEach(v=>{mx+=Number(v.max||100);ob+=Number(v.obt||0);});
-      const pct = mx?(ob/mx*100).toFixed(1):0;
+      const pct=mx?(ob/mx*100).toFixed(1):0;
       return `<tr><td>${r.rollNo}</td><td>${r.srn||'—'}</td><td>${r.name}</td><td>${r.class}</td>
-        <td>${r.fatherName||'—'}</td><td>${r.motherName||'—'}</td><td>${r.dob||'—'}</td><td>${r.year}</td>
+        <td>${r.fatherName||'—'}</td><td>${r.motherName||'—'}</td><td>${r.dob||'—'}</td><td>${r.mobile||'—'}</td><td>${r.year}</td>
         <td>${pct}%</td><td><button class="btn btn-danger btn-sm" onclick="deleteResult('${r.id}')">🗑️</button></td></tr>`;
     }).join('')}</tbody></table></div>
     <div style="margin-top:8px;font-size:.8rem;color:var(--gray-500)">${data.length} record(s)</div>`;
 }
 
-function deleteResult(id) {
-  const all = DB.get('results', []).filter(r => r.id !== id);
-  DB.set('results', all); renderResTable(); loadDashboard(); toast('Record deleted.', 'info');
-}
+function deleteResult(id) { DB.set('results',DB.get('results',[]).filter(r=>r.id!==id)); renderResTable(); loadDashboard(); toast('Record deleted.','info'); }
 
 // ============ GALLERY ============
+function previewGalPhoto(e) {
+  const f = e.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('galPhotoPreview').src = ev.target.result;
+    document.getElementById('galPhotoPreviewWrap').style.display = 'block';
+  };
+  reader.readAsDataURL(f);
+}
+
 function renderGalCatFilter() {
   const gallery = DB.get('gallery', []);
   const cats = [...new Set(gallery.map(p => p.category).filter(Boolean))];
@@ -713,120 +740,105 @@ function renderGalCatFilter() {
 }
 
 function renderGallery() {
-  const gallery = DB.get('gallery', []);
-  const catFilter = (document.getElementById('galCatFilter')||{value:''}).value;
-  const filtered = catFilter ? gallery.filter(p => p.category === catFilter) : gallery;
+  const gallery    = DB.get('gallery', []);
+  const catFilter  = (document.getElementById('galCatFilter')||{value:''}).value;
+  const filtered   = catFilter ? gallery.filter(p=>p.category===catFilter) : gallery;
   document.getElementById('galCount').textContent = gallery.length;
   const el = document.getElementById('galList');
-  if (!filtered.length) { el.innerHTML = '<p style="color:var(--gray-500)">No photos yet. Add your first gallery photo above.</p>'; return; }
+  if (!filtered.length) { el.innerHTML='<p style="color:var(--gray-500)">No photos yet. Add your first gallery photo above.</p>'; return; }
   el.innerHTML = filtered.map(p => `
     <div class="gallery-admin-card">
-      <div class="gac-img">
-        ${p.image ? `<img src="${p.image}" alt="${p.title}" />` : '🖼️'}
-      </div>
+      <div class="gac-img">${p.image?`<img src="${p.image}" alt="${p.title}" />`:'🖼️'}</div>
       <div class="gac-body">
         <div class="gac-title">${p.title}</div>
         <div class="gac-meta">${p.category} · ${new Date(p.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div>
-        ${p.description ? `<div style="font-size:.75rem;color:var(--gray-700);margin-top:4px">${p.description.substring(0,60)}${p.description.length>60?'...':''}</div>` : ''}
+        ${p.description?`<div style="font-size:.75rem;color:var(--gray-700);margin-top:4px">${p.description.substring(0,60)}${p.description.length>60?'...':''}</div>`:''}
         <div class="gac-actions">
           <button class="btn btn-outline btn-sm" onclick="editGalleryPhoto('${p.id}')">✏️ Edit</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteGalleryPhoto('${p.id}')">🗑️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteGalleryPhoto('${p.id}')">🗑️ Delete</button>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function saveGalleryPhoto() {
-  const title = document.getElementById('galTitle').value.trim();
-  const cat = document.getElementById('galCat').value;
-  const date = document.getElementById('galDate').value;
-  const desc = document.getElementById('galDesc').value.trim();
+  const title  = document.getElementById('galTitle').value.trim();
+  const cat    = document.getElementById('galCat').value;
+  const date   = document.getElementById('galDate').value;
+  const desc   = document.getElementById('galDesc').value.trim();
   const photoFile = document.getElementById('galPhoto').files[0];
   const editId = document.getElementById('editGalleryId').value;
-
-  if (!title || !date) { showMsg('galMsg','Please fill Title and Date.','danger'); return; }
-
-  const proceed = (imgData) => {
+  if (!title||!date) { showMsg('galMsg','Please fill Title and Date.','danger'); return; }
+  const proceed = imgData => {
     const gallery = DB.get('gallery', []);
     if (editId) {
-      const idx = gallery.findIndex(p => p.id === editId);
-      if (idx >= 0) {
-        gallery[idx] = { ...gallery[idx], title, category:cat, date, description:desc };
-        if (imgData) gallery[idx].image = imgData;
-      }
+      const idx = gallery.findIndex(p => p.id===editId);
+      if (idx>=0) { gallery[idx]={...gallery[idx],title,category:cat,date,description:desc}; if(imgData) gallery[idx].image=imgData; }
     } else {
-      if (!imgData) { showMsg('galMsg','Please select a photo.','danger'); return; }
-      gallery.unshift({ id:'g_'+Date.now(), title, category:cat, date, description:desc, image:imgData });
+      if (!imgData) { showMsg('galMsg','Please select a photo image.','danger'); return; }
+      gallery.unshift({id:'g_'+Date.now(),title,category:cat,date,description:desc,image:imgData});
     }
-    DB.set('gallery', gallery);
-    showMsg('galMsg', editId ? '✅ Photo updated!' : '✅ Photo added to gallery!', 'success');
+    DB.set('gallery',gallery);
+    showMsg('galMsg',editId?'✅ Photo updated!':'✅ Photo added to gallery!','success');
     resetGalleryForm(); renderGallery(); renderGalCatFilter(); loadDashboard();
-    toast(editId ? 'Gallery photo updated!' : 'Gallery photo added!', 'success');
+    toast(editId?'Gallery photo updated!':'Gallery photo added!','success');
   };
-
   if (photoFile) { const r=new FileReader(); r.onload=e=>proceed(e.target.result); r.readAsDataURL(photoFile); }
   else proceed(null);
 }
 
 function editGalleryPhoto(id) {
-  const p = DB.get('gallery',[]).find(x => x.id === id);
-  if (!p) return;
-  document.getElementById('editGalleryId').value = p.id;
-  document.getElementById('galTitle').value = p.title || '';
-  document.getElementById('galCat').value = p.category || '';
-  document.getElementById('galDate').value = p.date || '';
-  document.getElementById('galDesc').value = p.description || '';
-  document.getElementById('galleryFormTitle').textContent = '✏️ Edit Gallery Photo';
+  const p = DB.get('gallery',[]).find(x=>x.id===id); if(!p) return;
+  document.getElementById('editGalleryId').value=p.id;
+  document.getElementById('galTitle').value=p.title||'';
+  document.getElementById('galCat').value=p.category||'';
+  document.getElementById('galDate').value=p.date||'';
+  document.getElementById('galDesc').value=p.description||'';
+  document.getElementById('galPhotoLabel').textContent='(optional – leave blank to keep existing)';
+  if (p.image) { document.getElementById('galPhotoPreview').src=p.image; document.getElementById('galPhotoPreviewWrap').style.display='block'; }
+  document.getElementById('galleryFormTitle').textContent='✏️ Edit Gallery Photo';
   document.querySelector('#panel-gallery .sec-card').scrollIntoView({behavior:'smooth'});
 }
 
 function deleteGalleryPhoto(id) {
   if (!confirm('Delete this photo from gallery?')) return;
-  DB.set('gallery', DB.get('gallery',[]).filter(p => p.id !== id));
-  renderGallery(); renderGalCatFilter(); loadDashboard();
-  toast('Photo deleted.', 'info');
+  DB.set('gallery',DB.get('gallery',[]).filter(p=>p.id!==id)); renderGallery(); renderGalCatFilter(); loadDashboard(); toast('Photo deleted.','info');
 }
 
 function resetGalleryForm() {
-  document.getElementById('editGalleryId').value = '';
-  document.getElementById('galTitle').value = '';
-  document.getElementById('galDate').valueAsDate = new Date();
-  document.getElementById('galDesc').value = '';
-  document.getElementById('galPhoto').value = '';
-  document.getElementById('galleryFormTitle').textContent = '➕ Add Gallery Photo';
-  document.getElementById('galMsg').innerHTML = '';
+  document.getElementById('editGalleryId').value=''; document.getElementById('galTitle').value='';
+  document.getElementById('galDate').valueAsDate=new Date(); document.getElementById('galDesc').value='';
+  document.getElementById('galPhoto').value=''; document.getElementById('galPhotoLabel').textContent='(required for new)';
+  document.getElementById('galPhotoPreviewWrap').style.display='none';
+  document.getElementById('galleryFormTitle').textContent='➕ Add Gallery Photo';
+  document.getElementById('galMsg').innerHTML='';
 }
 
 // ============ ACTIVITIES ============
 function addActivity() {
-  const title = document.getElementById('actTitle').value.trim();
-  const cat = document.getElementById('actCat').value;
-  const date = document.getElementById('actDate').value;
-  const desc = document.getElementById('actDesc').value.trim();
-  const photoFile = document.getElementById('actPhoto').files[0];
-  if (!title || !date || !desc) { showMsg('actMsg','Please fill all required fields.','danger'); return; }
-
-  const proceed = (imgData) => {
-    const activities = DB.get('activities', []);
-    activities.unshift({ id:'a_'+Date.now(), title, category:cat, date, description:desc,
-      image:imgData||null, icon:{Academic:'📚',Sports:'⚽',Cultural:'🎭',Notice:'📢',Event:'🎉'}[cat]||'📌' });
-    DB.set('activities', activities);
+  const title=document.getElementById('actTitle').value.trim();
+  const cat=document.getElementById('actCat').value;
+  const date=document.getElementById('actDate').value;
+  const desc=document.getElementById('actDesc').value.trim();
+  const photoFile=document.getElementById('actPhoto').files[0];
+  if (!title||!date||!desc) { showMsg('actMsg','Please fill all required fields.','danger'); return; }
+  const proceed = imgData => {
+    const acts=DB.get('activities',[]);
+    acts.unshift({id:'a_'+Date.now(),title,category:cat,date,description:desc,image:imgData||null,
+      icon:{Academic:'📚',Sports:'⚽',Cultural:'🎭',Notice:'📢',Event:'🎉'}[cat]||'📌'});
+    DB.set('activities',acts);
     showMsg('actMsg','✅ Activity posted!','success');
     document.getElementById('actTitle').value=''; document.getElementById('actDesc').value=''; document.getElementById('actPhoto').value='';
     renderActivities(); loadDashboard(); toast('Activity posted!','success');
   };
-
-  if (photoFile) { const r=new FileReader(); r.onload=e=>proceed(e.target.result); r.readAsDataURL(photoFile); }
-  else proceed(null);
+  if (photoFile) { const r=new FileReader(); r.onload=e=>proceed(e.target.result); r.readAsDataURL(photoFile); } else proceed(null);
 }
 
 function renderActivities() {
-  const acts = DB.get('activities', []);
-  document.getElementById('actCount').textContent = acts.length;
-  const el = document.getElementById('actList');
-  if (!acts.length) { el.innerHTML = '<p style="color:var(--gray-500)">No activities yet.</p>'; return; }
-  el.innerHTML = acts.map(a => `
+  const acts=DB.get('activities',[]); document.getElementById('actCount').textContent=acts.length;
+  const el=document.getElementById('actList');
+  if (!acts.length) { el.innerHTML='<p style="color:var(--gray-500)">No activities yet.</p>'; return; }
+  el.innerHTML=acts.map(a=>`
     <div class="act-row">
       <div style="font-size:1.8rem">${a.icon||'📌'}</div>
       <div class="act-info">
@@ -842,49 +854,82 @@ function renderActivities() {
 
 function deleteActivity(id) {
   if (!confirm('Delete this activity?')) return;
-  DB.set('activities', DB.get('activities',[]).filter(a=>a.id!==id));
-  renderActivities(); loadDashboard(); toast('Activity deleted.','info');
+  DB.set('activities',DB.get('activities',[]).filter(a=>a.id!==id)); renderActivities(); loadDashboard(); toast('Deleted.','info');
 }
 
-// ============ TEACHERS ============
+// ============ TEACHERS — with photo preview & remove ============
+let _tcPhotoData = null;   // holds newly selected or existing photo data
+let _tcPhotoRemoved = false; // flag: admin clicked Remove
+
+function previewTeacherPhoto(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    _tcPhotoData = ev.target.result;
+    _tcPhotoRemoved = false;
+    const box = document.getElementById('tcPhotoPreviewBox');
+    box.innerHTML = `<img src="${_tcPhotoData}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />`;
+    document.getElementById('tcRemovePhotoBtn').style.display = 'inline-flex';
+  };
+  reader.readAsDataURL(f);
+}
+
+function removeTeacherPhoto() {
+  _tcPhotoData = null;
+  _tcPhotoRemoved = true;
+  document.getElementById('tcPhotoPreviewBox').innerHTML = '👩‍🏫';
+  document.getElementById('tcPhoto').value = '';
+  document.getElementById('tcRemovePhotoBtn').style.display = 'none';
+}
+
 function saveTeacher() {
-  const name = document.getElementById('tcName').value.trim();
-  const desig = document.getElementById('tcDesig').value;
-  const subject = document.getElementById('tcSubject').value.trim();
-  const qual = document.getElementById('tcQual').value.trim();
-  const exp = document.getElementById('tcExp').value.trim();
-  const phone = document.getElementById('tcPhone').value.trim();
-  const photoFile = document.getElementById('tcPhoto').files[0];
-  const editId = document.getElementById('editTeacherId').value;
+  const name=document.getElementById('tcName').value.trim();
+  const desig=document.getElementById('tcDesig').value;
+  const subject=document.getElementById('tcSubject').value.trim();
+  const qual=document.getElementById('tcQual').value.trim();
+  const exp=document.getElementById('tcExp').value.trim();
+  const phone=document.getElementById('tcPhone').value.trim();
+  const editId=document.getElementById('editTeacherId').value;
   if (!name) { showMsg('tcMsg','Please enter teacher name.','danger'); return; }
 
-  const proceed = (img) => {
-    const teachers = DB.get('teachers', []);
-    const t = { id:editId||'t_'+Date.now(), name, designation:desig, subject, qualification:qual, experience:exp, phone, photo:img };
-    if (editId) {
-      const i = teachers.findIndex(x=>x.id===editId);
-      if (i>=0) { if (!img && teachers[i].photo) t.photo=teachers[i].photo; teachers[i]=t; }
-    } else { teachers.push(t); }
-    DB.set('teachers', teachers);
-    showMsg('tcMsg','✅ Teacher saved!','success');
-    resetTeacherForm(); renderTeachers(); loadDashboard(); toast('Teacher saved!','success');
-  };
+  const teachers=DB.get('teachers',[]);
+  let finalPhoto = null;
 
-  if (photoFile) { const r=new FileReader(); r.onload=e=>proceed(e.target.result); r.readAsDataURL(photoFile); }
-  else proceed(null);
+  if (_tcPhotoRemoved) {
+    finalPhoto = null; // explicitly removed
+  } else if (_tcPhotoData) {
+    finalPhoto = _tcPhotoData; // newly uploaded
+  } else if (editId) {
+    // keep existing photo
+    const existing = teachers.find(x=>x.id===editId);
+    finalPhoto = existing ? existing.photo : null;
+  }
+
+  const t = { id:editId||'t_'+Date.now(), name, designation:desig, subject, qualification:qual, experience:exp, phone, photo:finalPhoto };
+  if (editId) {
+    const i=teachers.findIndex(x=>x.id===editId);
+    if (i>=0) teachers[i]=t; else teachers.push(t);
+  } else {
+    teachers.push(t);
+  }
+  DB.set('teachers',teachers);
+  showMsg('tcMsg','✅ Teacher profile saved!','success');
+  resetTeacherForm(); renderTeachers(); loadDashboard(); toast('Teacher saved!','success');
 }
 
 function resetTeacherForm() {
   document.getElementById('editTeacherId').value='';
   ['tcName','tcSubject','tcQual','tcExp','tcPhone'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('tcPhoto').value='';
+  document.getElementById('tcPhotoPreviewBox').innerHTML='👩‍🏫';
+  document.getElementById('tcRemovePhotoBtn').style.display='none';
   document.getElementById('teacherFormTitle').textContent='➕ Add Teacher Profile';
   document.getElementById('tcMsg').innerHTML='';
+  _tcPhotoData=null; _tcPhotoRemoved=false;
 }
 
 function editTeacher(id) {
-  const t = DB.get('teachers',[]).find(x=>x.id===id);
-  if (!t) return;
+  const t=DB.get('teachers',[]).find(x=>x.id===id); if(!t) return;
   document.getElementById('editTeacherId').value=t.id;
   document.getElementById('tcName').value=t.name||'';
   document.getElementById('tcDesig').value=t.designation||'';
@@ -892,22 +937,30 @@ function editTeacher(id) {
   document.getElementById('tcQual').value=t.qualification||'';
   document.getElementById('tcExp').value=t.experience||'';
   document.getElementById('tcPhone').value=t.phone||'';
+  // Load existing photo into preview
+  _tcPhotoData = null; _tcPhotoRemoved = false;
+  const box=document.getElementById('tcPhotoPreviewBox');
+  const removeBtn=document.getElementById('tcRemovePhotoBtn');
+  if (t.photo) {
+    box.innerHTML=`<img src="${t.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />`;
+    removeBtn.style.display='inline-flex';
+  } else {
+    box.innerHTML='👩‍🏫'; removeBtn.style.display='none';
+  }
   document.getElementById('teacherFormTitle').textContent='✏️ Edit Teacher Profile';
   document.querySelector('#panel-teachers .sec-card').scrollIntoView({behavior:'smooth'});
 }
 
 function deleteTeacher(id) {
   if (!confirm('Delete this teacher profile?')) return;
-  DB.set('teachers', DB.get('teachers',[]).filter(t=>t.id!==id));
-  renderTeachers(); loadDashboard(); toast('Teacher deleted.','info');
+  DB.set('teachers',DB.get('teachers',[]).filter(t=>t.id!==id)); renderTeachers(); loadDashboard(); toast('Deleted.','info');
 }
 
 function renderTeachers() {
-  const teachers = DB.get('teachers', []);
-  document.getElementById('tcCount').textContent = teachers.length;
-  const el = document.getElementById('tcList');
+  const teachers=DB.get('teachers',[]); document.getElementById('tcCount').textContent=teachers.length;
+  const el=document.getElementById('tcList');
   if (!teachers.length) { el.innerHTML='<p style="color:var(--gray-500)">No teacher profiles yet.</p>'; return; }
-  el.innerHTML = teachers.map(t => `
+  el.innerHTML=teachers.map(t=>`
     <div class="tc-row">
       <div class="tc-ava">${t.photo?`<img src="${t.photo}" />`:'👩‍🏫'}</div>
       <div class="tc-info-r">
@@ -916,96 +969,64 @@ function renderTeachers() {
       </div>
       <div class="tc-actions">
         <button class="btn btn-outline btn-sm" onclick="editTeacher('${t.id}')">✏️ Edit</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteTeacher('${t.id}')">🗑️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteTeacher('${t.id}')">🗑️ Delete</button>
       </div>
     </div>`).join('');
 }
 
 // ============ SETTINGS — LOGO ============
 function loadSettingsForm() {
-  // Logo
-  const logoData = localStorage.getItem('school_logo');
-  const lp = document.getElementById('logoPreview');
-  lp.innerHTML = logoData ? `<img src="${logoData}" alt="Logo" />` : '🏫';
-
-  // Contact
-  const c = DB.get('school_contact', {});
-  document.getElementById('ctAddress').value = c.address || 'Village Kagdana, Tehsil Dabwali, Sirsa, Haryana – 125104';
-  document.getElementById('ctPhone').value = c.phone || '';
-  document.getElementById('ctEmail').value = c.email || 'gghs.kagdana@gmail.com';
-  document.getElementById('ctHours').value = c.hours || 'Mon – Sat: 8:00 AM – 2:00 PM';
+  const logoData=localStorage.getItem('school_logo');
+  document.getElementById('logoPreview').innerHTML=logoData?`<img src="${logoData}" alt="Logo" />`:'🏫';
+  const c=DB.get('school_contact',{});
+  document.getElementById('ctAddress').value=c.address||'Village Kagdana, Sirsa, Haryana';
+  document.getElementById('ctPhone').value=c.phone||'';
+  document.getElementById('ctEmail').value=c.email||'gghs.kagdana@gmail.com';
+  document.getElementById('ctHours').value=c.hours||'Mon – Sat: 8:00 AM – 2:00 PM';
 }
-
 function uploadLogo(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    localStorage.setItem('school_logo', ev.target.result);
-    document.getElementById('logoPreview').innerHTML = `<img src="${ev.target.result}" alt="Logo" />`;
-    toast('School logo updated! Reload pages to see changes.', 'success');
-  };
-  reader.readAsDataURL(file);
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{ localStorage.setItem('school_logo',ev.target.result); document.getElementById('logoPreview').innerHTML=`<img src="${ev.target.result}" />`; toast('Logo updated! Download data.json to publish.','success'); };
+  r.readAsDataURL(file);
 }
-
-function removeLogo() {
-  if (!confirm('Remove school logo?')) return;
-  localStorage.removeItem('school_logo');
-  document.getElementById('logoPreview').innerHTML = '🏫';
-  toast('Logo removed.', 'info');
-}
+function removeLogo() { if(!confirm('Remove school logo?')) return; localStorage.removeItem('school_logo'); document.getElementById('logoPreview').innerHTML='🏫'; toast('Logo removed.','info'); }
 
 // ============ SETTINGS — CONTACT ============
 function saveContact() {
-  const contact = {
-    address: document.getElementById('ctAddress').value.trim(),
-    phone: document.getElementById('ctPhone').value.trim(),
-    email: document.getElementById('ctEmail').value.trim(),
-    hours: document.getElementById('ctHours').value.trim()
-  };
-  DB.set('school_contact', contact);
-  showMsg('ctMsg','✅ Contact details saved! Changes visible site-wide.','success');
+  DB.set('school_contact',{ address:document.getElementById('ctAddress').value.trim(), phone:document.getElementById('ctPhone').value.trim(), email:document.getElementById('ctEmail').value.trim(), hours:document.getElementById('ctHours').value.trim() });
+  showMsg('ctMsg','✅ Contact details saved! Download data.json to publish.','success');
   toast('Contact info updated!','success');
 }
 
 // ============ SETTINGS — PASSWORD ============
 function changePassword() {
-  const cur = document.getElementById('curPass').value;
-  const newP = document.getElementById('newPass').value;
-  const conf = document.getElementById('confPass').value;
-  if (cur !== getPass()) { showMsg('passMsg','❌ Current password is incorrect.','danger'); return; }
-  if (newP.length < 6) { showMsg('passMsg','❌ New password must be at least 6 characters.','danger'); return; }
-  if (newP !== conf) { showMsg('passMsg','❌ Passwords do not match.','danger'); return; }
-  localStorage.setItem(ADMIN_KEY, newP);
+  const cur=document.getElementById('curPass').value;
+  const newP=document.getElementById('newPass').value;
+  const conf=document.getElementById('confPass').value;
+  if (cur!==getPass()) { showMsg('passMsg','❌ Current password is incorrect.','danger'); return; }
+  if (newP.length<6)   { showMsg('passMsg','❌ Minimum 6 characters required.','danger'); return; }
+  if (newP!==conf)     { showMsg('passMsg','❌ Passwords do not match.','danger'); return; }
+  localStorage.setItem(ADMIN_KEY,newP);
   showMsg('passMsg','✅ Password changed successfully!','success');
-  ['curPass','newPass','confPass'].forEach(id => document.getElementById(id).value='');
+  ['curPass','newPass','confPass'].forEach(id=>document.getElementById(id).value='');
 }
 
-// ============ DATA MANAGEMENT ============
-function exportData() {
-  const data = {
-    results: DB.get('results',[]), activities: DB.get('activities',[]),
-    teachers: DB.get('teachers',[]), gallery: DB.get('gallery',[]),
-    contact: DB.get('school_contact',{})
-  };
-  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'GGHS_Data_'+new Date().toISOString().split('T')[0]+'.json'; a.click();
-}
-
+// ============ IMPORT ============
 function importDataPrompt() {
-  const inp = document.createElement('input'); inp.type='file'; inp.accept='.json';
-  inp.onchange = e => {
-    const f = e.target.files[0]; if (!f) return;
-    const r = new FileReader();
-    r.onload = ev => {
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='.json';
+  inp.onchange=e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=ev=>{
       try {
-        const d = JSON.parse(ev.target.result);
-        if (d.results) DB.set('results', d.results);
-        if (d.activities) DB.set('activities', d.activities);
-        if (d.teachers) DB.set('teachers', d.teachers);
-        if (d.gallery) DB.set('gallery', d.gallery);
-        if (d.contact) DB.set('school_contact', d.contact);
+        const d=JSON.parse(ev.target.result);
+        if (d.results)    DB.set('results',d.results);
+        if (d.activities) DB.set('activities',d.activities);
+        if (d.teachers)   DB.set('teachers',d.teachers);
+        if (d.gallery)    DB.set('gallery',d.gallery);
+        if (d.contact)    DB.set('school_contact',d.contact);
+        if (d.logo)       localStorage.setItem('school_logo',d.logo);
         toast('Data imported successfully!','success');
         initAdmin();
       } catch { toast('Invalid JSON file.','danger'); }
@@ -1016,11 +1037,10 @@ function importDataPrompt() {
 }
 
 // ============ UTILS ============
-function showMsg(id, msg, type) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.innerHTML = `<div class="alert alert-${type}" style="margin-top:12px">${msg}</div>`;
-  setTimeout(() => { if(el) el.innerHTML=''; }, 4000);
+function showMsg(id,msg,type) {
+  const el=document.getElementById(id); if(!el) return;
+  el.innerHTML=`<div class="alert alert-${type}" style="margin-top:12px">${msg}</div>`;
+  setTimeout(()=>{ if(el) el.innerHTML=''; },5000);
 }
 </script>
 </body>

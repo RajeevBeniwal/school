@@ -202,8 +202,9 @@ function buildResultCard(r, idx) {
   let totalMax = 0, totalObt = 0, failedSubjects = 0;
   const subRows = Object.entries(subs).map(([name, v]) => {
     const mx = Number(v.max)||100, ob = Number(v.obt)||0;
-    totalMax += mx; totalObt += ob;
+    totalMax += mx;
     const pass = ob >= mx * 0.33;
+    if (pass) totalObt += ob;
     if (!pass) failedSubjects++;
     const subPct = mx ? ob / mx * 100 : 0;
     const subGrade = getGrade(subPct);
@@ -337,8 +338,8 @@ function renderClassTable() {
           let mx=0,ob=0,failedSubs=0;
           Object.values(r.subjects||{}).forEach(v=>{
             const vmax=Number(v.max||100),vobt=Number(v.obt||0);
-            mx+=vmax;ob+=vobt;
-            if(vobt<vmax*0.33)failedSubs++;
+            mx+=vmax;
+            if(vobt<vmax*0.33){failedSubs++;}else{ob+=vobt;}
           });
           const pct = mx?(ob/mx*100).toFixed(1):0;
           const g = getGrade(Number(pct));

@@ -58,6 +58,7 @@ function getGrade(pct) {
   if (pct >= 70) return 'B';
   if (pct >= 60) return 'C';
   if (pct >= 50) return 'D';
+  if (pct >= 33) return 'E';
   return 'F';
 }
 function gradeClass(g) {
@@ -65,6 +66,7 @@ function gradeClass(g) {
   if (g.startsWith('B')) return 'grade-B';
   if (g.startsWith('C')) return 'grade-C';
   if (g.startsWith('D')) return 'grade-D';
+  if (g.startsWith('E')) return 'grade-E';
   return 'grade-F';
 }
 
@@ -140,8 +142,9 @@ function printResultCard(r) {
   let totalMax = 0, totalObt = 0, failedSubjects = 0;
   const subRows = Object.entries(subs).map(([name, v]) => {
     const mx = Number(v.max)||100, ob = Number(v.obt)||0;
-    totalMax += mx; totalObt += ob;
+    totalMax += mx;
     const pass = ob >= mx * 0.33;
+    if (pass) totalObt += ob;
     if (!pass) failedSubjects++;
     const subPct = mx ? ob / mx * 100 : 0;
     const subGrade = getGrade(subPct);
@@ -276,8 +279,9 @@ function buildWhatsAppMessage(r) {
   const lines = [];
   Object.entries(subs).forEach(([name, v]) => {
     const mx = Number(v.max)||100, ob = Number(v.obt)||0;
-    totalMax += mx; totalObt += ob;
+    totalMax += mx;
     const subPass = ob >= mx * 0.33;
+    if (subPass) totalObt += ob;
     if (!subPass) failedSubjects++;
     const subPct = mx ? ob / mx * 100 : 0;
     const subGrade = getGrade(subPct);

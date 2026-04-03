@@ -195,33 +195,6 @@ function populateYearFilters() {
   });
 }
 
-// ── Search ──
-function searchResult() {
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
-  const yr = document.getElementById('yearFilter').value;
-  const out = document.getElementById('resultOutput');
-  if (!q) {
-    out.innerHTML = '<div class="alert alert-info" style="max-width:600px;margin:0 auto">Please enter a Roll No, Name, or SRN to search.</div>';
-    return;
-  }
-  let results = DB.get('results', []);
-  if (yr) results = results.filter(r => r.year === yr);
-  const found = results.filter(r =>
-    String(r.rollNo).toLowerCase() === q ||
-    r.name.toLowerCase().includes(q) ||
-    (r.srn && String(r.srn).toLowerCase() === q)
-  );
-  if (!found.length) {
-    out.innerHTML = `<div class="no-result">
-      <div class="icon">🔍</div>
-      <h3 style="color:var(--maroon);font-family:'Cormorant Garamond',serif;font-size:1.6rem">No Result Found</h3>
-      <p style="color:var(--gray-500);margin-top:8px">No record found for "<strong>${q}</strong>".<br>Please check your Roll No / Name / SRN and try again.</p>
-    </div>`;
-    return;
-  }
-  out.innerHTML = found.map((r, idx) => buildResultCard(r, idx)).join('');
-}
-
 document.getElementById('searchInput').addEventListener('keyup', e => { if (e.key === 'Enter') searchResult(); });
 
 function buildResultCard(r, idx) {
@@ -232,10 +205,14 @@ function buildResultCard(r, idx) {
     totalMax += mx; totalObt += ob;
     const pass = ob >= mx * 0.33;
     if (!pass) failedSubjects++;
+    const subPct = mx ? ob / mx * 100 : 0;
+    const subGrade = getGrade(subPct);
+    const gc = gradeClass(subGrade);
     return `<tr>
       <td>${name}</td>
       <td style="text-align:center">${mx}</td>
       <td style="text-align:center;font-weight:700">${ob}</td>
+      <td style="text-align:center"><span class="grade-badge ${gc}">${subGrade}</span></td>
       <td style="text-align:center">
         <span style="font-weight:700;color:${pass?'#155724':'#721c24'}">${pass?'Pass':'Fail'}</span>
       </td>
@@ -277,9 +254,10 @@ function buildResultCard(r, idx) {
             <th>Subject</th>
             <th style="text-align:center">Max Marks</th>
             <th style="text-align:center">Marks Obtained</th>
+            <th style="text-align:center">Grade</th>
             <th style="text-align:center">Status</th>
           </tr></thead>
-          <tbody>${subRows || '<tr><td colspan="4" style="text-align:center;color:var(--gray-500);padding:20px">No subject data available</td></tr>'}</tbody>
+          <tbody>${subRows || '<tr><td colspan="5" style="text-align:center;color:var(--gray-500);padding:20px">No subject data available</td></tr>'}</tbody>
         </table>
       </div>
       <div class="result-summary">
@@ -296,10 +274,8 @@ function buildResultCard(r, idx) {
   </div>`;
 }
 
-// Store found results so print buttons can reference them
-let _lastFound = [];
-const origSearch = searchResult;
-searchResult = function() {
+// ── Search ──
+function searchResult() {
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
   const yr = document.getElementById('yearFilter').value;
   const out = document.getElementById('resultOutput');
@@ -403,4 +379,8 @@ function renderClassTable() {
 
 function selectClass(cls) { selectedClass = cls; renderClassTable(); }
 
-fun
+// Init
+populateYearFilters();
+</script>
+</body>
+</html>

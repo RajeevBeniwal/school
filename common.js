@@ -137,21 +137,25 @@ function toast(msg, type = 'success') {
 // ── Print result card (A4-sized, non-blank) ──
 function printResultCard(r) {
   const subs = r.subjects || {};
-  let totalMax = 0, totalObt = 0;
+  let totalMax = 0, totalObt = 0, failedSubjects = 0;
   const subRows = Object.entries(subs).map(([name, v]) => {
     const mx = Number(v.max)||100, ob = Number(v.obt)||0;
     totalMax += mx; totalObt += ob;
     const pass = ob >= mx * 0.33;
+    if (!pass) failedSubjects++;
+    const subPct = mx ? ob / mx * 100 : 0;
+    const subGrade = getGrade(subPct);
     return `<tr>
       <td>${name}</td>
       <td style="text-align:center">${mx}</td>
       <td style="text-align:center;font-weight:700">${ob}</td>
+      <td style="text-align:center;font-weight:700">${subGrade}</td>
       <td style="text-align:center;font-weight:700;color:${pass?'#155724':'#721c24'}">${pass?'Pass':'Fail'}</td>
     </tr>`;
   }).join('');
   const pct = totalMax ? (totalObt/totalMax*100).toFixed(1) : 0;
   const grade = getGrade(Number(pct));
-  const isPass = Number(pct) >= 33;
+  const isPass = Number(pct) >= 33 && failedSubjects < 2;
   const c = getContact();
 
   const html = `<!DOCTYPE html>
@@ -227,11 +231,12 @@ function printResultCard(r) {
       <tr>
         <th>Subject</th>
         <th style="text-align:center;width:120px">Maximum Marks</th>
-        <th style="text-align:center;width:140px">Marks Obtained</th>
+        <th style="text-align:center;width:120px">Marks Obtained</th>
+        <th style="text-align:center;width:70px">Grade</th>
         <th style="text-align:center;width:80px">Status</th>
       </tr>
     </thead>
-    <tbody>${subRows || '<tr><td colspan="4" style="text-align:center;color:#888;padding:16px">No subject data available</td></tr>'}</tbody>
+    <tbody>${subRows || '<tr><td colspan="5" style="text-align:center;color:#888;padding:16px">No subject data available</td></tr>'}</tbody>
   </table>
 </div>
 
@@ -267,16 +272,20 @@ ${r.remarks ? `<div class="remarks-bar"><strong style="color:#6b0f1a">Remarks:</
 // ── WhatsApp result sender ──
 function buildWhatsAppMessage(r) {
   const subs = r.subjects || {};
-  let totalMax = 0, totalObt = 0;
+  let totalMax = 0, totalObt = 0, failedSubjects = 0;
   const lines = [];
   Object.entries(subs).forEach(([name, v]) => {
     const mx = Number(v.max)||100, ob = Number(v.obt)||0;
     totalMax += mx; totalObt += ob;
-    lines.push(`  ${name}: ${ob}/${mx}`);
+    const subPass = ob >= mx * 0.33;
+    if (!subPass) failedSubjects++;
+    const subPct = mx ? ob / mx * 100 : 0;
+    const subGrade = getGrade(subPct);
+    lines.push(`  ${name}: ${ob}/${mx}  [${subGrade}] ${subPass?'✅':'❌'}`);
   });
   const pct  = totalMax ? (totalObt/totalMax*100).toFixed(1) : 0;
   const grade = getGrade(Number(pct));
-  const pass  = Number(pct) >= 33;
+  const pass  = Number(pct) >= 33 && failedSubjects < 2;
 
   return `*Govt. Girls High School Kagdana, Sirsa*\n` +
     `*Annual Examination Result Card*\n` +
@@ -367,7 +376,9 @@ function whatsappBulk(results) {
     const r = window._waBulkList[window._waIdx];
     let mx=0,ob=0; Object.values(r.subjects||{}).forEach(v=>{mx+=Number(v.max||100);ob+=Number(v.obt||0);});
     const pct = mx?(ob/mx*100).toFixed(1):0;
-    const pass = Number(pct)>=33;
+    let failedSubs=0;
+    Object.values(r.subjects||{}).forEach(v=>{const vm=Number(v.max||100),vo=Number(v.obt||0);if(vo<vm*0.33)failedSubs++;});
+    const pass = Number(pct)>=33 && failedSubs<2;
     document.getElementById('waIdx').textContent = window._waIdx + 1;
     document.getElementById('waProgress').style.width = Math.round((window._waIdx+1)/valid.length*100) + '%';
     document.getElementById('waPct').textContent = Math.round((window._waIdx+1)/valid.length*100) + '%';

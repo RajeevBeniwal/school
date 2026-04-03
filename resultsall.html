@@ -163,14 +163,14 @@
         <li><a href="teachers.html">Faculty</a></li><li><a href="activities.html">Activities</a></li>
         <li><a href="gallery.html">Gallery</a></li><li><a href="results.html">Results</a></li>
       </ul></div>
-      <div class="footer-col"><h4>📞 Contact</h4><p class="footer-contact-info">📧 gghs.kagdana@gmail.com<br>📍 Village Kagdana, Sirsa<br>🕐 Mon – Sat: 8:00 AM – 2:00 PM</p></div>
+      <div class="footer-col"><h4>📞 Contact</h4><p class="footer-contact-info">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f691919e85d89d979192979897b6919b979f9ad895999b">[email&#160;protected]</a><br>📍 Village Kagdana, Sirsa<br>🕐 Mon – Sat: 8:00 AM – 2:00 PM</p></div>
       <div class="footer-col"><h4>🏛️ Education Dept.</h4><p>Under Haryana Education Department<br>District: Sirsa, Haryana</p></div>
     </div>
   </div>
   <div class="footer-bar"><div class="container">© 2024 Govt. Girls High School Kagdana. All Rights Reserved.</div></div>
 </footer>
 
-<script src="common.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="common.js"></script>
 <script>
 // Tabs
 document.querySelectorAll('.tab').forEach(t => {
@@ -226,11 +226,12 @@ document.getElementById('searchInput').addEventListener('keyup', e => { if (e.ke
 
 function buildResultCard(r, idx) {
   const subs = r.subjects || {};
-  let totalMax = 0, totalObt = 0;
+  let totalMax = 0, totalObt = 0, failedSubjects = 0;
   const subRows = Object.entries(subs).map(([name, v]) => {
     const mx = Number(v.max)||100, ob = Number(v.obt)||0;
     totalMax += mx; totalObt += ob;
     const pass = ob >= mx * 0.33;
+    if (!pass) failedSubjects++;
     return `<tr>
       <td>${name}</td>
       <td style="text-align:center">${mx}</td>
@@ -242,7 +243,7 @@ function buildResultCard(r, idx) {
   }).join('');
   const pct = totalMax ? (totalObt/totalMax*100).toFixed(1) : 0;
   const grade = getGrade(Number(pct));
-  const isPass = Number(pct) >= 33;
+  const isPass = Number(pct) >= 33 && failedSubjects < 2;
 
   return `
   <div class="result-card">
@@ -357,11 +358,15 @@ function renderClassTable() {
           <th>Total</th><th>%</th><th>Grade</th><th>Result</th><th>Actions</th>
         </tr></thead>
         <tbody>${data.map((r,i) => {
-          let mx=0,ob=0;
-          Object.values(r.subjects||{}).forEach(v=>{mx+=Number(v.max||100);ob+=Number(v.obt||0);});
+          let mx=0,ob=0,failedSubs=0;
+          Object.values(r.subjects||{}).forEach(v=>{
+            const vmax=Number(v.max||100),vobt=Number(v.obt||0);
+            mx+=vmax;ob+=vobt;
+            if(vobt<vmax*0.33)failedSubs++;
+          });
           const pct = mx?(ob/mx*100).toFixed(1):0;
           const g = getGrade(Number(pct));
-          const pass = Number(pct) >= 33;
+          const pass = Number(pct) >= 33 && failedSubs < 2;
           const rJson = JSON.stringify(r).replace(/"/g,'&quot;');
           const hasMob = r.mobile && r.mobile.replace(/\D/g,'').length >= 10;
           return `<tr>
@@ -398,16 +403,4 @@ function renderClassTable() {
 
 function selectClass(cls) { selectedClass = cls; renderClassTable(); }
 
-function sendAllWhatsApp() {
-  const data = window._currentClassData || [];
-  whatsappBulk(data);
-}
-
-// Init
-populateYearFilters();
-renderClassTable();
-window._foundResults = [];
-window._currentClassData = [];
-</script>
-</body>
-</html>
+fun

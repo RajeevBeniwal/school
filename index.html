@@ -343,13 +343,8 @@ function loadActivityCards() {
   `).join('');
 }
 
-  `).join('');
-}
-
-try { loadStats(); } catch(e) {}
-try { loadNotices(); } catch(e) {}
-try { loadActivityCards(); } catch(e) {}
-
+  
+loadStats(); loadNotices(); loadActivityCards();
 const nGrid = document.querySelector('.notice-events-grid');
 if (window.innerWidth < 768 && nGrid) nGrid.style.gridTemplateColumns = '1fr';
 </script>

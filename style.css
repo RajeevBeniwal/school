@@ -468,8 +468,9 @@ table tbody td { padding: 13px 16px; font-size: .88rem; }
 .grade-A { background: #d4edda; color: #155724; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
 .grade-B { background: #d1ecf1; color: #0c5460; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
 .grade-C { background: #fff3cd; color: #856404; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
-.grade-D { background: #f8d7da; color: #721c24; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
-.grade-F { background: #343a40; color: #fff; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
+.grade-D { background: #c2c175; color: #721c24; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
+.grade-E { background: #965543d7; color: #a01d79; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
+.grade-F { background: #fa0505; color: #fff; padding: 3px 12px; border-radius: 99px; font-weight: 800; font-size:.8rem; }
 
 /* ===== MODAL ===== */
 .modal-overlay {
@@ -510,8 +511,10 @@ table tbody td { padding: 13px 16px; font-size: .88rem; }
   background: linear-gradient(135deg, #4a0a12, #8b1a28);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity .8s ease;
+  pointer-events: none;
 }
 .slide.active { opacity: 1; }
+.slide.active a, .slide.active .btn { pointer-events: auto; }
 .slide-content { text-align: center; color: var(--white); padding: 24px; max-width: 700px; }
 .slide-content h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -522,6 +525,7 @@ table tbody td { padding: 13px 16px; font-size: .88rem; }
 .slide-dots {
   position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
   display: flex; gap: 8px;
+  z-index: 10;
 }
 .dot {
   width: 8px; height: 8px; border-radius: 50%;

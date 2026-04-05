@@ -29,6 +29,31 @@
     .vision-box { background:var(--maroon);color:var(--white);padding:28px;border-radius:var(--radius); }
     .vision-box h3 { font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold-lt);margin-bottom:10px; }
     .vision-box p { font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.8); }
+
+    /* ===== SLIDER FIX (self-contained, overrides style.css) ===== */
+    .hero-slider { position: relative !important; height: 460px !important; overflow: hidden !important; }
+    .hero-slider .slide {
+      position: absolute !important; top:0 !important; left:0 !important;
+      right:0 !important; bottom:0 !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      opacity: 0 !important; transition: opacity 0.8s ease !important;
+      pointer-events: none !important;
+    }
+    .hero-slider .slide.active { opacity: 1 !important; }
+    .hero-slider .slide.active a,
+    .hero-slider .slide.active .btn { pointer-events: auto !important; }
+    .hero-slider .slide-dots {
+      position: absolute !important; bottom: 20px !important;
+      left: 50% !important; transform: translateX(-50%) !important;
+      display: flex !important; gap: 10px !important;
+      z-index: 999 !important; pointer-events: auto !important;
+    }
+    .hero-slider .dot {
+      width: 12px !important; height: 12px !important; border-radius: 50% !important;
+      background: rgba(255,255,255,0.4) !important; cursor: pointer !important;
+      transition: background 0.3s !important; pointer-events: auto !important;
+    }
+    .hero-slider .dot.active { background: #e8b84b !important; }
   </style>
 </head>
 <body>
@@ -237,7 +262,7 @@
       </div>
       <div class="footer-col">
         <h4>📞 Contact</h4>
-        <p class="footer-contact-info">📧 gghs.kagdana@gmail.com<br>📍 Village Kagdana, Sirsa<br>🕐 Mon – Sat: 8:00 AM – 2:00 PM</p>
+        <p class="footer-contact-info">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2245454a510c49434546434c4362454f434b4e0c414d4f">[email&#160;protected]</a><br>📍 Village Kagdana, Sirsa<br>🕐 Mon – Sat: 8:00 AM – 2:00 PM</p>
       </div>
       <div class="footer-col">
         <h4>🏛️ Education Dept.</h4>
@@ -250,20 +275,33 @@
   </div>
 </footer>
 
-<script src="common.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="common.js"></script>
+
+<!-- SLIDER: fully isolated script — cannot be broken by DB errors -->
 <script>
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-function goSlide(n) {
-  slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
-  currentSlide = (n + slides.length) % slides.length;
-  slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
-}
-dots.forEach(d => d.addEventListener('click', () => goSlide(+d.dataset.i)));
-setInterval(() => goSlide(currentSlide + 1), 5000);
+(function () {
+  var sl = document.querySelector('.hero-slider');
+  if (!sl) return;
+  var slides = Array.from(sl.querySelectorAll('.slide'));
+  var dots   = Array.from(sl.querySelectorAll('.dot'));
+  if (!slides.length) return;
+  var cur = 0;
+  function go(n) {
+    slides[cur].classList.remove('active');
+    if (dots[cur]) dots[cur].classList.remove('active');
+    cur = ((n % slides.length) + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    if (dots[cur]) dots[cur].classList.add('active');
+  }
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () { go(i); });
+  });
+  setInterval(function () { go(cur + 1); }, 5000);
+}());
+</script>
+
+<script>
+/* Page content — DB errors here are isolated, won't touch slider */
 
 function loadStats() {
   const results = DB.get('results', []);
@@ -301,10 +339,16 @@ function loadActivityCards() {
         <div style="font-size:.82rem;margin-top:6px">${a.description.substring(0,80)}...</div>
       </div>
     </div>
+
   `).join('');
 }
 
-loadStats(); loadNotices(); loadActivityCards();
+  `).join('');
+}
+
+try { loadStats(); } catch(e) {}
+try { loadNotices(); } catch(e) {}
+try { loadActivityCards(); } catch(e) {}
 
 const nGrid = document.querySelector('.notice-events-grid');
 if (window.innerWidth < 768 && nGrid) nGrid.style.gridTemplateColumns = '1fr';

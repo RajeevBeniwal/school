@@ -158,7 +158,7 @@ function printResultCard(r) {
   }).join('');
   const pct = totalMax ? (totalObt/totalMax*100).toFixed(1) : 0;
   const grade = getGrade(Number(pct));
-  const isPass = Number(pct) >= 33 && failedSubjects < 2;
+  const isPass = Number(pct) >= 33 && failedSubjects < 1;
   const c = getContact();
 
   const html = `<!DOCTYPE html>
@@ -319,93 +319,357 @@ function whatsappResult(r) {
   window.open(url, '_blank');
 }
 
-// ── WhatsApp Bulk Sender — opens a guided modal ──
+// ── WhatsApp Bulk Sender — smooth auto-advance modal ──
 function whatsappBulk(results) {
   const valid = results.filter(r => r.mobile && r.mobile.replace(/\D/g,'').length >= 10);
   const invalid = results.length - valid.length;
 
-  // Remove existing modal if any
   const old = document.getElementById('waBulkModal');
   if (old) old.remove();
 
+  // ── State ──
+  let waIdx = 0;
+  let autoMode = false;
+  let autoDelay = 20; // seconds
+  let countdown = autoDelay;
+  let countInterval = null;
+  let sentLog = []; // {name, status:'sent'|'skipped'}
+
+  const WA_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+  // ── Build modal HTML ──
   const modal = document.createElement('div');
   modal.id = 'waBulkModal';
-  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:Nunito,sans-serif';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;font-family:Nunito,sans-serif';
 
-  modal.innerHTML = `
-    <div style="background:#fff;border-radius:12px;box-shadow:0 8px 48px rgba(0,0,0,.3);width:100%;max-width:560px;overflow:hidden">
+  if (valid.length === 0) {
+    modal.innerHTML = `<div style="background:#fff;border-radius:14px;box-shadow:0 8px 48px rgba(0,0,0,.3);width:100%;max-width:480px;overflow:hidden">
       <div style="background:#4a0a12;color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div style="font-weight:800;font-size:1.1rem">💬 Send Results via WhatsApp</div>
-          <div style="font-size:.78rem;color:rgba(255,255,255,.7);margin-top:2px">${valid.length} students with mobile numbers${invalid?' · '+invalid+' skipped (no mobile)':''}</div>
-        </div>
-        <button onclick="document.getElementById('waBulkModal').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+        <div style="font-weight:800;font-size:1.05rem">💬 Bulk WhatsApp Sender</div>
+        <button onclick="document.getElementById('waBulkModal').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:1rem;cursor:pointer">✕</button>
       </div>
-      <div style="padding:20px 24px">
-        ${valid.length === 0 ? `<div style="text-align:center;padding:24px;color:#888"><div style="font-size:2.5rem;margin-bottom:8px">⚠️</div><p>No students have mobile numbers stored.<br><small>Add <strong>Mobile</strong> column to your Excel file and re-upload.</small></p></div>` : `
-        <div style="background:#d4edda;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;color:#155724">
-          <strong>How it works:</strong> Click <em>"Open WhatsApp"</em> for each student. WhatsApp Web/App opens with the result pre-filled — just tap Send. Click <em>"Next →"</em> to continue.
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div style="font-weight:700;color:#4a0a12">Student <span id="waIdx">1</span> of ${valid.length}</div>
-          <div style="background:#f0f0f4;border-radius:99px;height:8px;flex:1;margin:0 14px;overflow:hidden"><div id="waProgress" style="height:100%;background:#c9950a;border-radius:99px;transition:width .3s;width:${valid.length?Math.round(1/valid.length*100):0}%"></div></div>
-          <span id="waPct" style="font-size:.78rem;color:#888;white-space:nowrap">${valid.length?Math.round(1/valid.length*100):0}%</span>
-        </div>
-        <div id="waStudentCard" style="background:#fdf3d7;border-radius:8px;padding:14px 18px;margin-bottom:16px;border-left:4px solid #c9950a">
-          <div id="waStudentName" style="font-weight:800;font-size:1rem;color:#4a0a12"></div>
-          <div id="waStudentMeta" style="font-size:.82rem;color:#666;margin-top:3px"></div>
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button id="waOpenBtn" onclick="waOpenCurrent()" style="flex:1;background:#25D366;color:#fff;border:none;padding:11px 18px;border-radius:8px;font-weight:800;font-size:.9rem;cursor:pointer;font-family:Nunito,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Open WhatsApp
-          </button>
-          <button id="waNextBtn" onclick="waNext()" style="background:#4a0a12;color:#fff;border:none;padding:11px 18px;border-radius:8px;font-weight:800;font-size:.9rem;cursor:pointer;font-family:Nunito,sans-serif">Next →</button>
-          <button onclick="document.getElementById('waBulkModal').remove()" style="background:#f0f0f4;color:#444;border:none;padding:11px 14px;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:Nunito,sans-serif">✕ Close</button>
-        </div>
-        <div style="margin-top:12px;text-align:center;font-size:.75rem;color:#aaa" id="waSkipInfo"></div>
-        `}
+      <div style="padding:32px;text-align:center;color:#888">
+        <div style="font-size:3rem;margin-bottom:12px">⚠️</div>
+        <p style="font-size:.95rem">No students have mobile numbers stored.</p>
+        <small>Add a <strong>Mobile</strong> column to your Excel and re-upload.</small>
       </div>
     </div>`;
+    document.body.appendChild(modal);
+    return;
+  }
+
+  modal.innerHTML = `
+  <div style="background:#fff;border-radius:14px;box-shadow:0 8px 48px rgba(0,0,0,.35);width:100%;max-width:600px;overflow:hidden;max-height:96vh;display:flex;flex-direction:column">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#4a0a12,#6b0f1a);color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+      <div>
+        <div style="font-weight:800;font-size:1.05rem;display:flex;align-items:center;gap:8px">${WA_ICON} Bulk WhatsApp Sender</div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.65);margin-top:3px" id="waHeaderSub">${valid.length} students ready${invalid ? ' · ' + invalid + ' skipped (no mobile)' : ''}</div>
+      </div>
+      <button onclick="waBulkClose()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:1rem;cursor:pointer;flex-shrink:0">✕</button>
+    </div>
+
+    <!-- Progress bar -->
+    <div style="height:5px;background:#f0e8e8;flex-shrink:0">
+      <div id="waBulkBar" style="height:100%;background:linear-gradient(90deg,#25D366,#128C7E);width:0%;transition:width .4s ease"></div>
+    </div>
+
+    <div style="padding:18px 20px;overflow-y:auto;flex:1">
+
+      <!-- Stats row -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px">
+        <div style="background:#f8f8f8;border-radius:8px;padding:10px;text-align:center">
+          <div id="waSentCount" style="font-size:1.4rem;font-weight:800;color:#25D366">0</div>
+          <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;color:#aaa;margin-top:1px">Sent</div>
+        </div>
+        <div style="background:#f8f8f8;border-radius:8px;padding:10px;text-align:center">
+          <div id="waSkipCount" style="font-size:1.4rem;font-weight:800;color:#f0ad4e">0</div>
+          <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;color:#aaa;margin-top:1px">Skipped</div>
+        </div>
+        <div style="background:#f8f8f8;border-radius:8px;padding:10px;text-align:center">
+          <div id="waRemCount" style="font-size:1.4rem;font-weight:800;color:#4a0a12">${valid.length}</div>
+          <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;color:#aaa;margin-top:1px">Remaining</div>
+        </div>
+        <div style="background:#f8f8f8;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:1.4rem;font-weight:800;color:#888">${valid.length}</div>
+          <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;color:#aaa;margin-top:1px">Total</div>
+        </div>
+      </div>
+
+      <!-- Current student card -->
+      <div id="waStudentCard" style="background:linear-gradient(135deg,#fdf3d7,#fef9ec);border-radius:10px;padding:14px 16px;margin-bottom:14px;border-left:4px solid #c9950a;display:flex;align-items:center;gap:12px">
+        <div style="background:#c9950a;color:#fff;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0" id="waStudentInitial">?</div>
+        <div style="flex:1;min-width:0">
+          <div id="waStudentName" style="font-weight:800;font-size:.98rem;color:#4a0a12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
+          <div id="waStudentMeta" style="font-size:.78rem;color:#666;margin-top:2px"></div>
+        </div>
+        <div id="waResultBadge" style="padding:4px 10px;border-radius:99px;font-size:.72rem;font-weight:800;flex-shrink:0"></div>
+      </div>
+
+      <!-- Auto-mode settings -->
+      <div style="background:#f0faf4;border-radius:10px;padding:12px 16px;margin-bottom:14px;border:1px solid #b2dfcb">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-weight:800;font-size:.85rem;color:#155724">⚡ Auto-Mode</div>
+            <div style="font-size:.72rem;color:#1e7e34;margin-top:2px">Opens WhatsApp & auto-advances. You just press Send each time.</div>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+            <div id="waToggleTrack" onclick="waToggleAuto()" style="width:44px;height:24px;background:#ccc;border-radius:99px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0">
+              <div id="waToggleThumb" style="position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)"></div>
+            </div>
+            <span id="waToggleLabel" style="font-weight:700;font-size:.8rem;color:#155724">OFF</span>
+          </label>
+        </div>
+        <div id="waTimerRow" style="display:none;margin-top:10px;align-items:center;gap:10px;flex-wrap:wrap">
+          <span style="font-size:.78rem;font-weight:700;color:#444">Delay between students:</span>
+          <div style="display:flex;gap:6px">
+            ${[10,15,20,30].map(s => `<button onclick="waSetDelay(${s})" id="waDelay${s}" style="padding:4px 10px;border-radius:6px;border:2px solid ${s===20?'#25D366':'#ddd'};background:${s===20?'#25D366':'#fff'};color:${s===20?'#fff':'#444'};font-weight:700;font-size:.75rem;cursor:pointer;font-family:Nunito,sans-serif">${s}s</button>`).join('')}
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+            <div id="waCountdownRing" style="position:relative;width:36px;height:36px;flex-shrink:0">
+              <svg width="36" height="36" style="transform:rotate(-90deg)">
+                <circle cx="18" cy="18" r="15" fill="none" stroke="#e8e8e8" stroke-width="3"/>
+                <circle id="waCountdownArc" cx="18" cy="18" r="15" fill="none" stroke="#25D366" stroke-width="3" stroke-dasharray="94.2" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s linear"/>
+              </svg>
+              <div id="waCountdownNum" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#155724"></div>
+            </div>
+            <span style="font-size:.72rem;color:#888">next in</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+        <button id="waSendBtn" onclick="waSendCurrent()" style="flex:1;min-width:140px;background:#25D366;color:#fff;border:none;padding:12px 16px;border-radius:9px;font-weight:800;font-size:.88rem;cursor:pointer;font-family:Nunito,sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .2s">
+          ${WA_ICON} Open & Send
+        </button>
+        <button id="waSkipBtn" onclick="waSkipCurrent()" style="background:#fff;color:#444;border:2px solid #ddd;padding:12px 16px;border-radius:9px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Nunito,sans-serif;transition:all .2s">
+          ⏭ Skip
+        </button>
+        <button id="waPauseBtn" onclick="waPauseResume()" style="display:none;background:#fff;color:#4a0a12;border:2px solid #4a0a12;padding:12px 16px;border-radius:9px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Nunito,sans-serif">
+          ⏸ Pause
+        </button>
+        <button onclick="waBulkClose()" style="background:#f5f5f5;color:#888;border:none;padding:12px 14px;border-radius:9px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:Nunito,sans-serif">
+          ✕
+        </button>
+      </div>
+
+      <!-- Keyboard hint -->
+      <div style="text-align:center;font-size:.7rem;color:#bbb;margin-bottom:10px">
+        ⌨️ <strong>Space</strong> = Send &amp; Next &nbsp;·&nbsp; <strong>S</strong> = Skip &nbsp;·&nbsp; <strong>P</strong> = Pause/Resume
+      </div>
+
+      <!-- Sent log -->
+      <div id="waLog" style="max-height:130px;overflow-y:auto;border-radius:8px;border:1px solid #eee;display:none">
+        <div style="padding:8px 12px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#aaa;border-bottom:1px solid #eee;background:#fafafa">Activity Log</div>
+        <div id="waLogItems" style="font-size:.76rem"></div>
+      </div>
+
+    </div>
+  </div>`;
 
   document.body.appendChild(modal);
 
-  if (valid.length === 0) return;
-
-  let idx = 0;
-  window._waBulkList = valid;
-  window._waIdx = 0;
-
-  function updateCard() {
-    const r = window._waBulkList[window._waIdx];
-    let mx=0,ob=0; Object.values(r.subjects||{}).forEach(v=>{mx+=Number(v.max||100);ob+=Number(v.obt||0);});
-    const pct = mx?(ob/mx*100).toFixed(1):0;
-    let failedSubs=0;
-    Object.values(r.subjects||{}).forEach(v=>{const vm=Number(v.max||100),vo=Number(v.obt||0);if(vo<vm*0.33)failedSubs++;});
+  // ── Helpers ──
+  function getStudentInfo(r) {
+    let mx=0, ob=0, failedSubs=0;
+    Object.values(r.subjects||{}).forEach(v=>{
+      const vm=Number(v.max||100), vo=Number(v.obt||0);
+      mx+=vm;
+      if(vo < vm*0.33){ failedSubs++; } else { ob+=vo; }
+    });
+    const pct = mx ? (ob/mx*100).toFixed(1) : 0;
     const pass = Number(pct)>=33 && failedSubs<2;
-    document.getElementById('waIdx').textContent = window._waIdx + 1;
-    document.getElementById('waProgress').style.width = Math.round((window._waIdx+1)/valid.length*100) + '%';
-    document.getElementById('waPct').textContent = Math.round((window._waIdx+1)/valid.length*100) + '%';
-    document.getElementById('waStudentName').textContent = r.name;
-    document.getElementById('waStudentMeta').innerHTML =
-      `Roll: ${r.rollNo}${r.srn?' | SRN: '+r.srn:''} | Class ${r.class} | 📱 ${r.mobile} | ${pct}% — <strong style="color:${pass?'#155724':'#721c24'}">${pass?'PASS':'FAIL'}</strong>`;
-    const isLast = window._waIdx >= valid.length - 1;
-    document.getElementById('waNextBtn').textContent = isLast ? '✅ Done' : 'Next →';
-    document.getElementById('waSkipInfo').textContent = isLast ? 'All students covered!' : `${valid.length - window._waIdx - 1} remaining`;
+    return { pct, pass };
   }
 
-  window.waOpenCurrent = function() {
-    whatsappResult(window._waBulkList[window._waIdx]);
-  };
+  function updateCard() {
+    if (waIdx >= valid.length) return;
+    const r = valid[waIdx];
+    const { pct, pass } = getStudentInfo(r);
+    const initial = r.name.trim()[0].toUpperCase();
 
-  window.waNext = function() {
-    if (window._waIdx >= valid.length - 1) {
-      document.getElementById('waBulkModal').remove();
+    document.getElementById('waStudentInitial').textContent = initial;
+    document.getElementById('waStudentName').textContent = r.name;
+    document.getElementById('waStudentMeta').innerHTML =
+      `📋 ${r.rollNo}${r.srn?' · '+r.srn:''} · Class ${r.class} · 📱 ${r.mobile}`;
+    const badge = document.getElementById('waResultBadge');
+    badge.textContent = pass ? '✅ PASS' : '❌ FAIL';
+    badge.style.background = pass ? '#d4edda' : '#f8d7da';
+    badge.style.color = pass ? '#155724' : '#721c24';
+
+    const prog = Math.round((waIdx / valid.length) * 100);
+    document.getElementById('waBulkBar').style.width = prog + '%';
+    document.getElementById('waHeaderSub').textContent =
+      `Student ${waIdx+1} of ${valid.length}${invalid ? ' · '+invalid+' no mobile' : ''}`;
+    document.getElementById('waSentCount').textContent = sentLog.filter(x=>x.status==='sent').length;
+    document.getElementById('waSkipCount').textContent = sentLog.filter(x=>x.status==='skipped').length;
+    document.getElementById('waRemCount').textContent = valid.length - waIdx;
+
+    const log = document.getElementById('waLog');
+    if (sentLog.length > 0) log.style.display = 'block';
+  }
+
+  function addLog(r, status) {
+    sentLog.push({ name: r.name, status });
+    const items = document.getElementById('waLogItems');
+    const row = document.createElement('div');
+    row.style.cssText = 'padding:6px 12px;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:8px';
+    row.innerHTML = `<span style="font-size:.85rem">${status==='sent'?'✅':'⏭'}</span>
+      <span style="flex:1;color:#333">${r.name}</span>
+      <span style="color:#aaa;font-size:.68rem">${status==='sent'?'Opened':'Skipped'}</span>`;
+    items.appendChild(row);
+    items.parentElement.scrollTop = items.parentElement.scrollHeight;
+    document.getElementById('waSentCount').textContent = sentLog.filter(x=>x.status==='sent').length;
+    document.getElementById('waSkipCount').textContent = sentLog.filter(x=>x.status==='skipped').length;
+    document.getElementById('waLog').style.display = 'block';
+  }
+
+  function stopCountdown() {
+    if (countInterval) { clearInterval(countInterval); countInterval = null; }
+    document.getElementById('waTimerRow').style.display = 'none';
+    document.getElementById('waPauseBtn').style.display = 'none';
+  }
+
+  function startCountdown() {
+    countdown = autoDelay;
+    const arc = document.getElementById('waCountdownArc');
+    const num = document.getElementById('waCountdownNum');
+    const circumference = 94.2;
+    document.getElementById('waTimerRow').style.display = 'flex';
+    document.getElementById('waPauseBtn').style.display = '';
+
+    function tick() {
+      num.textContent = countdown;
+      arc.style.strokeDashoffset = circumference * (1 - countdown / autoDelay);
+      if (countdown <= 0) {
+        clearInterval(countInterval); countInterval = null;
+        waSendAndAdvance();
+      } else {
+        countdown--;
+      }
+    }
+    tick();
+    countInterval = setInterval(tick, 1000);
+  }
+
+  function advance() {
+    waIdx++;
+    if (waIdx >= valid.length) {
+      // All done
+      stopCountdown();
+      document.getElementById('waStudentCard').innerHTML =
+        `<div style="text-align:center;width:100%;padding:12px 0">
+          <div style="font-size:2.2rem">🎉</div>
+          <div style="font-weight:800;color:#155724;font-size:1rem;margin-top:6px">All done!</div>
+          <div style="font-size:.8rem;color:#888;margin-top:4px">${sentLog.filter(x=>x.status==='sent').length} sent · ${sentLog.filter(x=>x.status==='skipped').length} skipped</div>
+        </div>`;
+      document.getElementById('waBulkBar').style.width = '100%';
+      document.getElementById('waSendBtn').disabled = true;
+      document.getElementById('waSendBtn').style.opacity = '.4';
+      document.getElementById('waSkipBtn').disabled = true;
+      document.getElementById('waSkipBtn').style.opacity = '.4';
+      document.getElementById('waRemCount').textContent = '0';
+      document.getElementById('waHeaderSub').textContent = 'All students covered!';
       return;
     }
-    window._waIdx++;
     updateCard();
+    if (autoMode) startCountdown();
+  }
+
+  // ── Global action functions ──
+  window.waSendCurrent = function() {
+    if (waIdx >= valid.length) return;
+    const r = valid[waIdx];
+    const mob = (r.mobile || '').replace(/\D/g, '');
+    const msg = buildWhatsAppMessage(r);
+    const url = 'https://web.whatsapp.com/send?phone=' + (mob.length===10?'91'+mob:mob) + '&text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    addLog(r, 'sent');
+    if (autoMode) { stopCountdown(); startCountdown(); } else { advance(); }
   };
+
+  window.waSendAndAdvance = function() {
+    advance();
+    if (waIdx < valid.length) {
+      const r = valid[waIdx];
+      const mob = (r.mobile || '').replace(/\D/g, '');
+      const msg = buildWhatsAppMessage(r);
+      const url = 'https://web.whatsapp.com/send?phone=' + (mob.length===10?'91'+mob:mob) + '&text=' + encodeURIComponent(msg);
+      window.open(url, '_blank');
+      addLog(r, 'sent');
+    }
+  };
+
+  window.waSkipCurrent = function() {
+    if (waIdx >= valid.length) return;
+    addLog(valid[waIdx], 'skipped');
+    if (autoMode) stopCountdown();
+    advance();
+  };
+
+  window.waToggleAuto = function() {
+    autoMode = !autoMode;
+    const track = document.getElementById('waToggleTrack');
+    const thumb = document.getElementById('waToggleThumb');
+    const label = document.getElementById('waToggleLabel');
+    const pauseBtn = document.getElementById('waPauseBtn');
+    track.style.background = autoMode ? '#25D366' : '#ccc';
+    thumb.style.left = autoMode ? '22px' : '2px';
+    label.textContent = autoMode ? 'ON' : 'OFF';
+    if (autoMode) {
+      startCountdown();
+    } else {
+      stopCountdown();
+      pauseBtn.style.display = 'none';
+    }
+  };
+
+  window.waSetDelay = function(s) {
+    autoDelay = s;
+    [10,15,20,30].forEach(x => {
+      const b = document.getElementById('waDelay'+x);
+      if (b) {
+        b.style.borderColor = x===s ? '#25D366' : '#ddd';
+        b.style.background = x===s ? '#25D366' : '#fff';
+        b.style.color = x===s ? '#fff' : '#444';
+      }
+    });
+    if (autoMode) { stopCountdown(); startCountdown(); }
+  };
+
+  window.waPauseResume = function() {
+    const btn = document.getElementById('waPauseBtn');
+    if (countInterval) {
+      clearInterval(countInterval); countInterval = null;
+      btn.textContent = '▶ Resume';
+      btn.style.color = '#25D366';
+      btn.style.borderColor = '#25D366';
+    } else {
+      btn.textContent = '⏸ Pause';
+      btn.style.color = '#4a0a12';
+      btn.style.borderColor = '#4a0a12';
+      startCountdown();
+    }
+  };
+
+  window.waBulkClose = function() {
+    stopCountdown();
+    document.removeEventListener('keydown', waKeyHandler);
+    const m = document.getElementById('waBulkModal');
+    if (m) m.remove();
+  };
+
+  // Keyboard shortcuts
+  function waKeyHandler(e) {
+    if (!document.getElementById('waBulkModal')) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.code === 'Space') { e.preventDefault(); window.waSendCurrent(); }
+    if (e.key.toLowerCase() === 's') window.waSkipCurrent();
+    if (e.key.toLowerCase() === 'p') window.waPauseResume();
+  }
+  document.addEventListener('keydown', waKeyHandler);
 
   updateCard();
 }

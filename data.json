@@ -5418,6 +5418,26 @@
       "date": "2026-04-03",
       "desc": "",
       "size": "PDF"
+    },
+    {
+      "id": "dl_1775646850797",
+      "title": "Admission Open",
+      "url": "https://rajeevbeniwal.github.io/Files/admopen.jpeg",
+      "category": "photo",
+      "type": "image",
+      "date": "2026-04-08",
+      "desc": "First Come, First Serve",
+      "size": "Image"
+    },
+    {
+      "id": "dl_1775646954106",
+      "title": "Result in a Galance",
+      "url": "https://rajeevbeniwal.github.io/Files/resultp1.jpeg",
+      "category": "result",
+      "type": "image",
+      "date": "2026-04-01",
+      "desc": "Nice Result",
+      "size": "Image"
     }
   ],
   "contact": {

@@ -6,195 +6,67 @@
   <title>Contact Us – Govt Girls High School Kagdana</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Page-specific styles ── */
     .contact-hero {
       background: linear-gradient(135deg, var(--maroon-dk) 0%, var(--maroon) 60%, var(--maroon-lt) 100%);
-      color: var(--white);
-      padding: 52px 0 40px;
-      text-align: center;
+      color: var(--white); padding: 52px 0 40px; text-align: center;
     }
-    .contact-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--gold-lt);
-      margin-bottom: 8px;
-    }
-    .contact-hero p { font-size: .95rem; color: rgba(255,255,255,.8); }
+    .contact-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); color:var(--gold-lt); margin-bottom:8px; }
+    .contact-hero p  { font-size:.95rem; color:rgba(255,255,255,.8); }
 
-    /* ── Grid layout ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 32px;
-      padding: 40px 0 56px;
-    }
-    @media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:32px; padding:40px 0 56px; }
+    @media (max-width:820px) { .contact-grid { grid-template-columns:1fr; } }
 
-    /* ── Info cards ── */
-    .info-panel { display: flex; flex-direction: column; gap: 20px; }
-    .info-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px 26px;
-    }
-    .info-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      color: var(--maroon);
-      margin-bottom: 14px;
-      border-bottom: 2px solid var(--gold-pale);
-      padding-bottom: 8px;
-    }
-    .info-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-      font-size: .88rem;
-      color: var(--gray-700);
-      line-height: 1.6;
-    }
-    .info-row .ico { font-size: 1.3rem; min-width: 26px; }
-    .info-row a { color: var(--maroon); font-weight: 700; text-decoration: none; }
-    .info-row a:hover { color: var(--gold); }
+    .info-panel { display:flex; flex-direction:column; gap:20px; }
+    .info-card  { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px 26px; }
+    .info-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--maroon); margin-bottom:14px; border-bottom:2px solid var(--gold-pale); padding-bottom:8px; }
 
-    /* ── Action buttons ── */
-    .action-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
-    .btn-wa {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #25D366; color: #fff;
-      padding: 11px 22px; border-radius: 8px;
-      font-weight: 700; font-size: .88rem;
-      text-decoration: none; transition: all .25s;
-      border: none; cursor: pointer;
-    }
-    .btn-wa:hover { background: #1ebe5a; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,211,102,.35); }
-    .btn-mail {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--maroon); color: #fff;
-      padding: 11px 22px; border-radius: 8px;
-      font-weight: 700; font-size: .88rem;
-      text-decoration: none; transition: all .25s;
-    }
-    .btn-mail:hover { background: var(--maroon-dk); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .info-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; font-size:.88rem; color:var(--gray-700); line-height:1.6; }
+    .info-row .ico { font-size:1.3rem; min-width:26px; }
+    .info-row a { color:var(--maroon); font-weight:700; text-decoration:none; }
+    .info-row a:hover { color:var(--gold); }
 
-    /* ── Map box ── */
-    .map-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .map-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      color: var(--maroon);
-      padding: 16px 20px 10px;
-      border-bottom: 2px solid var(--gold-pale);
-    }
-    .map-embed {
-      width: 100%; height: 220px;
-      border: none;
-      display: block;
-    }
-    .map-card .map-footer {
-      padding: 12px 20px;
-      background: var(--gold-pale);
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-    }
-    .map-card .map-footer span { font-size: .8rem; color: var(--gray-700); }
-    .btn-directions {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--gold); color: var(--maroon-dk);
-      padding: 8px 18px; border-radius: 7px;
-      font-weight: 700; font-size: .82rem;
-      text-decoration: none; transition: all .25s;
-    }
-    .btn-directions:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .action-btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
+    .btn-wa  { display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff; padding:11px 22px; border-radius:8px; font-weight:700; font-size:.88rem; text-decoration:none; transition:all .25s; border:none; cursor:pointer; }
+    .btn-wa:hover  { background:#1ebe5a; transform:translateY(-2px); box-shadow:0 4px 16px rgba(37,211,102,.35); }
+    .btn-mail { display:inline-flex; align-items:center; gap:8px; background:var(--maroon); color:#fff; padding:11px 22px; border-radius:8px; font-weight:700; font-size:.88rem; text-decoration:none; transition:all .25s; }
+    .btn-mail:hover { background:var(--maroon-dk); transform:translateY(-2px); box-shadow:var(--shadow); }
 
-    /* ── Contact form ── */
-    .form-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 32px;
-    }
-    .form-card h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      color: var(--maroon);
-      margin-bottom: 6px;
-    }
-    .form-card .sub { font-size: .85rem; color: var(--gray-500); margin-bottom: 22px; }
-    .cf-group { margin-bottom: 18px; }
-    .cf-group label {
-      display: block; font-weight: 700; font-size: .82rem;
-      color: var(--gray-700); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em;
-    }
-    .cf-group label span { color: #c00; }
-    .cf-input {
-      width: 100%; padding: 11px 14px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: 8px; font-family: inherit;
-      font-size: .9rem; color: var(--text);
-      background: var(--cream);
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .cf-input:focus { outline: none; border-color: var(--maroon); box-shadow: 0 0 0 3px rgba(107,15,26,.1); }
-    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 520px) { .cf-row { grid-template-columns: 1fr; } }
-    .cf-textarea { resize: vertical; min-height: 110px; }
-    .submit-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-    .btn-submit {
-      background: var(--maroon); color: #fff;
-      border: none; padding: 13px 30px;
-      border-radius: 8px; font-family: inherit;
-      font-weight: 700; font-size: .92rem;
-      cursor: pointer; transition: all .25s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-submit:hover { background: var(--maroon-dk); transform: translateY(-2px); box-shadow: var(--shadow); }
-    .btn-submit-wa {
-      background: #25D366; color: #fff;
-      border: none; padding: 13px 24px;
-      border-radius: 8px; font-family: inherit;
-      font-weight: 700; font-size: .88rem;
-      cursor: pointer; transition: all .25s;
-      display: inline-flex; align-items: center; gap: 8px;
-      text-decoration: none;
-    }
-    .btn-submit-wa:hover { background: #1ebe5a; transform: translateY(-2px); }
+    .map-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
+    .map-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--maroon); padding:16px 20px 10px; border-bottom:2px solid var(--gold-pale); }
+    .map-embed { width:100%; height:220px; border:none; display:block; }
+    .map-card .map-footer { padding:12px 20px; background:var(--gold-pale); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    .map-card .map-footer span { font-size:.8rem; color:var(--gray-700); }
+    .btn-directions { display:inline-flex; align-items:center; gap:6px; background:var(--gold); color:var(--maroon-dk); padding:8px 18px; border-radius:7px; font-weight:700; font-size:.82rem; text-decoration:none; transition:all .25s; }
+    .btn-directions:hover { background:var(--gold-lt); transform:translateY(-1px); }
 
-    /* ── Success message ── */
-    #formSuccess {
-      display: none;
-      background: #e8f8ee; border: 1.5px solid #25D366;
-      border-radius: 10px; padding: 18px 22px;
-      color: #156a32; font-weight: 600; font-size: .92rem;
-      margin-top: 16px;
-    }
-    #formSuccess.show { display: flex; align-items: center; gap: 10px; }
+    .form-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:32px; }
+    .form-card h2 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--maroon); margin-bottom:6px; }
+    .form-card .sub { font-size:.85rem; color:var(--gray-500); margin-bottom:22px; }
+    .cf-group { margin-bottom:18px; }
+    .cf-group label { display:block; font-weight:700; font-size:.82rem; color:var(--gray-700); margin-bottom:6px; text-transform:uppercase; letter-spacing:.04em; }
+    .cf-group label span { color:#c00; }
+    .cf-input { width:100%; padding:11px 14px; border:1.5px solid var(--gray-200); border-radius:8px; font-family:inherit; font-size:.9rem; color:var(--text); background:var(--cream); transition:border-color .2s, box-shadow .2s; }
+    .cf-input:focus { outline:none; border-color:var(--maroon); box-shadow:0 0 0 3px rgba(107,15,26,.1); }
+    .cf-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media (max-width:520px) { .cf-row { grid-template-columns:1fr; } }
+    .cf-textarea { resize:vertical; min-height:110px; }
+    .submit-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:8px; }
+    .btn-submit { background:var(--maroon); color:#fff; border:none; padding:13px 30px; border-radius:8px; font-family:inherit; font-weight:700; font-size:.92rem; cursor:pointer; transition:all .25s; display:inline-flex; align-items:center; gap:8px; }
+    .btn-submit:hover { background:var(--maroon-dk); transform:translateY(-2px); box-shadow:var(--shadow); }
+    .btn-submit-wa { background:#25D366; color:#fff; border:none; padding:13px 24px; border-radius:8px; font-family:inherit; font-weight:700; font-size:.88rem; cursor:pointer; transition:all .25s; display:inline-flex; align-items:center; gap:8px; text-decoration:none; }
+    .btn-submit-wa:hover { background:#1ebe5a; transform:translateY(-2px); }
 
-    /* ── Quick contact strip ── */
-    .quick-strip {
-      background: var(--maroon);
-      padding: 28px 0;
-      margin-bottom: 0;
-    }
-    .quick-strip-inner {
-      display: flex; align-items: center; justify-content: center;
-      gap: 32px; flex-wrap: wrap;
-    }
-    .qstrip-item {
-      display: flex; align-items: center; gap: 12px;
-      color: var(--white);
-    }
-    .qstrip-item .qi { font-size: 1.6rem; }
-    .qstrip-item .qt { font-size: .82rem; color: rgba(255,255,255,.6); }
-    .qstrip-item .qv { font-weight: 700; font-size: .96rem; color: var(--gold-lt); }
-    .qstrip-item a { color: var(--gold-lt); text-decoration: none; }
-    .qstrip-item a:hover { color: var(--white); }
+    #formSuccess { display:none; background:#e8f8ee; border:1.5px solid #25D366; border-radius:10px; padding:18px 22px; color:#156a32; font-weight:600; font-size:.92rem; margin-top:16px; }
+    #formSuccess.show { display:flex; align-items:center; gap:10px; }
+
+    .quick-strip { background:var(--maroon); padding:28px 0; }
+    .quick-strip-inner { display:flex; align-items:center; justify-content:center; gap:32px; flex-wrap:wrap; }
+    .qstrip-item { display:flex; align-items:center; gap:12px; color:var(--white); }
+    .qstrip-item .qi { font-size:1.6rem; }
+    .qstrip-item .qt { font-size:.82rem; color:rgba(255,255,255,.6); }
+    .qstrip-item .qv { font-weight:700; font-size:.96rem; color:var(--gold-lt); }
+    .qstrip-item a { color:var(--gold-lt); text-decoration:none; }
+    .qstrip-item a:hover { color:var(--white); }
   </style>
 </head>
 <body>
@@ -253,28 +125,28 @@
   </div>
 </div>
 
-<!-- QUICK CONTACT STRIP -->
+<!-- QUICK CONTACT STRIP — all values set by JS from admin settings -->
 <div class="quick-strip">
   <div class="container quick-strip-inner">
     <div class="qstrip-item">
       <span class="qi">📞</span>
       <div>
         <div class="qt">Phone / WhatsApp</div>
-        <div class="qv"><a id="qs-phone" href="#">+91 94163 04928</a></div>
+        <div class="qv"><a id="qs-phone" href="#">Loading…</a></div>
       </div>
     </div>
     <div class="qstrip-item">
       <span class="qi">📧</span>
       <div>
         <div class="qt">Email</div>
-        <div class="qv"><a id="qs-email" href="#">gghs4700kagdana@gmail.com</a></div>
+        <div class="qv"><a id="qs-email" href="#">Loading…</a></div>
       </div>
     </div>
     <div class="qstrip-item">
       <span class="qi">🕐</span>
       <div>
         <div class="qt">Office Hours</div>
-        <div class="qv" id="qs-hours">Mon – Sat: 8:00 AM – 2:30 PM</div>
+        <div class="qv" id="qs-hours">Loading…</div>
       </div>
     </div>
   </div>
@@ -288,9 +160,9 @@
       <!-- LEFT — Info + Map -->
       <div class="info-panel">
 
-        <!-- Contact Details Card -->
         <div class="info-card">
           <h3>📋 School Contact Details</h3>
+
           <div class="info-row">
             <span class="ico">📍</span>
             <div>
@@ -298,46 +170,57 @@
               <span id="ci-address">Village Kagdana, Tehsil Nathusari Chopta,<br>Sirsa, Haryana – 125110</span>
             </div>
           </div>
+
           <div class="info-row">
             <span class="ico">📞</span>
             <div>
               <strong>Phone &amp; WhatsApp</strong><br>
-              <span id="ci-phone">+91 94163 04928</span>
+              <a id="ci-phone" href="#">Loading…</a>
             </div>
           </div>
+
           <div class="info-row">
             <span class="ico">📧</span>
             <div>
               <strong>Email</strong><br>
-              <a id="ci-email" href="mailto:gghs4700kagdana@gmail.com">gghs4700kagdana@gmail.com</a>
+              <a id="ci-email" href="#">Loading…</a>
             </div>
           </div>
+
           <div class="info-row">
             <span class="ico">🕐</span>
             <div>
               <strong>Office Hours</strong><br>
-              <span id="ci-hours">Mon – Sat: 8:00 AM – 2:30 PM</span>
+              <span id="ci-hours">Loading…</span>
             </div>
           </div>
- 
+
+          <!-- Direct contact action buttons — href set 100% by JS from admin phone/email -->
+          <div class="action-btns">
+            <a id="wa-btn" href="#" target="_blank" rel="noopener" class="btn-wa">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Chat on WhatsApp
+            </a>
+            <a id="email-btn" href="#" class="btn-mail">
+              ✉️ Send Email
+            </a>
+          </div>
         </div>
 
-        <!-- Google Map Card -->
+        <!-- Google Map -->
         <div class="map-card">
           <h3>🗺️ Find Us on Map</h3>
           <iframe
             class="map-embed"
             src="https://maps.google.com/maps?q=Village+Kagdana+Sirsa+Haryana+India&output=embed"
-            allowfullscreen
-            loading="lazy"
+            allowfullscreen loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="GGHS Kagdana Location Map">
           </iframe>
           <div class="map-footer">
             <span>📍 Village Kagdana, Tehsil Nathusari Chopta, Sirsa</span>
-            <a href="https://www.google.com/maps/@29.2926095,75.1632379,20.6z?entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-directions">
-              🧭 Get Directions
-            </a>
+            <a href="https://www.google.com/maps/@29.2926095,75.1632379,20.6z?entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D"
+               target="_blank" class="btn-directions">🧭 Get Directions</a>
           </div>
         </div>
 
@@ -380,7 +263,7 @@
         </div>
 
         <div class="submit-row">
-          <button class="btn-submit" onclick="submitForm('email')">
+          <button class="btn-submit" onclick="submitForm()">
             📨 Send via Email
           </button>
           <a id="cf-wa-send" href="#" class="btn-submit-wa" onclick="submitViaWA(event)">
@@ -394,9 +277,9 @@
         </div>
 
         <p style="font-size:.78rem;color:var(--gray-500);margin-top:18px;line-height:1.6;">
-          📌 <strong>Note:</strong> "Send via Email" will open your email client. "Send via WhatsApp" will open WhatsApp with your message pre-filled. School contact details are managed by the admin.
+          📌 <strong>Note:</strong> "Send via Email" opens your email client. "Send via WhatsApp" opens WhatsApp with your message pre-filled to the school's number. Both use the phone &amp; email set by the admin.
         </p>
-      </div><!-- /form-card -->
+      </div>
 
     </div><!-- /contact-grid -->
   </div>
@@ -444,99 +327,181 @@
 
 <script src="common.js"></script>
 <script>
-// ── Populate contact from DB / data.json ──
+// ─────────────────────────────────────────────────────────────────────────────
+// HOW THIS WORKS
+// ─────────────────────────────────────────────────────────────────────────────
+// Admin saves phone/email in admin.html → stored in localStorage key 'school_contact'
+// common.js also fetches data.json from GitHub and updates localStorage on every load.
+//
+// populateContact() reads from localStorage and wires up EVERY phone/WA link on
+// the page — nothing is ever hardcoded in HTML.
+//
+// We call populateContact() TWICE:
+//   1. Immediately → instant display using cached localStorage data
+//   2. After loadDataJson() finishes → picks up any changes the admin published
+//      to GitHub that haven't hit this browser's cache yet
+// ─────────────────────────────────────────────────────────────────────────────
+
 function populateContact() {
+  // Read admin-set contact from localStorage (written by admin.html saveContact()
+  // and also synced from data.json by common.js loadDataJson())
   const c = DB.get('school_contact', {
-    phone: '9416304928',
-    email: 'gghs4700kagdana@gmail.com',
+    phone:   '9416304928',
+    email:   'gghs4700kagdana@gmail.com',
     address: 'Village Kagdana, Tehsil Nathusari Chopta, Sirsa, Haryana – 125110',
-    hours: 'Mon – Sat: 8:00 AM – 2:30 PM'
+    hours:   'Mon – Sat: 8:00 AM – 2:30 PM'
   });
 
-  const phone = c.phone || '9416304928';
-  const email = c.email || 'gghs4700kagdana@gmail.com';
-  const hours = c.hours || 'Mon – Sat: 8:00 AM – 2:30 PM';
-  const cleanPhone = phone.replace(/\D/g, '');
-  const waNumber = cleanPhone.startsWith('91') ? cleanPhone : '91' + cleanPhone;
-  const waLink = `https://wa.me/${waNumber}?text=Hello%2C%20I%20have%20a%20query%20about%20GGHS%20Kagdana.`;
-  const mailLink = `mailto:${email}?subject=Query%20-%20GGHS%20Kagdana`;
+  // ── Build derived values ──────────────────────────────────────────────────
+  const phone      = (c.phone || '9416304928').trim();
+  const email      = (c.email || 'gghs4700kagdana@gmail.com').trim();
+  const address    = (c.address || 'Village Kagdana, Sirsa, Haryana').trim();
+  const hours      = (c.hours || 'Mon – Sat: 8:00 AM – 2:30 PM').trim();
 
-  if (c.address) document.getElementById('ci-address').innerHTML = c.address.replace(/,\s*/g, ',<br>');
-  document.getElementById('ci-phone').textContent = '+91 ' + phone;
-  document.getElementById('ci-phone').href = `tel:+${waNumber}`;
-  document.getElementById('ci-email').textContent = email;
-  document.getElementById('ci-email').href = `mailto:${email}`;
-  document.getElementById('ci-hours').textContent = hours;
+  // Strip non-digits, then ensure 91 prefix for WhatsApp
+  const digits     = phone.replace(/\D/g, '');
+  const waNumber   = digits.startsWith('91') ? digits : '91' + digits;
+  const waBaseLink = `https://wa.me/${waNumber}`;
+  const waLink     = waBaseLink + '?text=Hello%2C%20I%20have%20a%20query%20about%20GGHS%20Kagdana.';
+  const mailLink   = `mailto:${email}?subject=Query%20-%20GGHS%20Kagdana`;
 
-  // Quick strip
-  document.getElementById('qs-phone').textContent = '+91 ' + phone;
-  document.getElementById('qs-phone').href = `tel:+${waNumber}`;
-  document.getElementById('qs-email').textContent = email;
-  document.getElementById('qs-email').href = `mailto:${email}`;
-  document.getElementById('qs-hours').textContent = hours;
+  // ── Populate info card ────────────────────────────────────────────────────
+  const ciAddress = document.getElementById('ci-address');
+  if (ciAddress) ciAddress.innerHTML = address.replace(/,\s*/g, ',<br>');
 
-  // Buttons
-  document.getElementById('wa-btn').href = waLink;
-  document.getElementById('email-btn').href = mailLink;
+  const ciPhone = document.getElementById('ci-phone');
+  if (ciPhone) {
+    ciPhone.textContent = '+91 ' + phone;
+    ciPhone.href = 'tel:+' + waNumber;
+  }
 
-  // Store for form use
-  window._schoolContact = { phone, email, waNumber, waLink };
+  const ciEmail = document.getElementById('ci-email');
+  if (ciEmail) {
+    ciEmail.textContent = email;
+    ciEmail.href = 'mailto:' + email;
+  }
+
+  const ciHours = document.getElementById('ci-hours');
+  if (ciHours) ciHours.textContent = hours;
+
+  // ── Populate quick strip ──────────────────────────────────────────────────
+  const qsPhone = document.getElementById('qs-phone');
+  if (qsPhone) {
+    qsPhone.textContent = '+91 ' + phone;
+    qsPhone.href = 'tel:+' + waNumber;
+  }
+
+  const qsEmail = document.getElementById('qs-email');
+  if (qsEmail) {
+    qsEmail.textContent = email;
+    qsEmail.href = 'mailto:' + email;
+  }
+
+  const qsHours = document.getElementById('qs-hours');
+  if (qsHours) qsHours.textContent = hours;
+
+  // ── Wire up direct action buttons ────────────────────────────────────────
+  const waBtn = document.getElementById('wa-btn');
+  if (waBtn) waBtn.href = waLink;
+
+  const emailBtn = document.getElementById('email-btn');
+  if (emailBtn) emailBtn.href = mailLink;
+
+  // ── Update footer contact block ───────────────────────────────────────────
+  const footerInfo = document.getElementById('footer-contact-info');
+  if (footerInfo) {
+    footerInfo.innerHTML =
+      `📧 <a href="mailto:${email}" style="color:var(--gold-lt)">${email}</a><br>` +
+      `📍 ${address.split(',')[0]}<br>` +
+      `🕐 ${hours}`;
+  }
+
+  // ── Store on window for form submission use ───────────────────────────────
+  window._schoolContact = { phone, email, address, hours, waNumber, waLink, waBaseLink, mailLink };
 }
 
+// ── Call 1: immediately with cached localStorage data (instant display) ──────
 populateContact();
 
-// ── Form Submission ──
+// ── Call 2: after loadDataJson() pulls fresh data from GitHub/data.json ──────
+// This ensures the admin's latest saved phone number is always used,
+// even if the browser cache was stale on the first call above.
+if (typeof loadDataJson === 'function') {
+  loadDataJson().then(function() {
+    populateContact();   // re-run with freshly synced data
+  }).catch(function() {
+    // Network error / offline — first call above already covered it
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FORM SUBMISSION
+// ─────────────────────────────────────────────────────────────────────────────
+
 function getFormData() {
-  const name    = document.getElementById('cf-name').value.trim();
-  const phone   = document.getElementById('cf-phone').value.trim();
-  const address = document.getElementById('cf-address').value.trim();
-  const email   = document.getElementById('cf-email').value.trim();
-  const subject = document.getElementById('cf-subject').value.trim() || 'General Query';
-  const message = document.getElementById('cf-message').value.trim();
-  return { name, phone, address, email, subject, message };
+  return {
+    name:    document.getElementById('cf-name').value.trim(),
+    phone:   document.getElementById('cf-phone').value.trim(),
+    address: document.getElementById('cf-address').value.trim(),
+    email:   document.getElementById('cf-email').value.trim(),
+    subject: document.getElementById('cf-subject').value.trim() || 'General Query',
+    message: document.getElementById('cf-message').value.trim()
+  };
 }
 
 function validateForm() {
   const d = getFormData();
-  if (!d.name) { alert('Please enter your full name.'); return false; }
-  if (!d.phone) { alert('Please enter your contact number.'); return false; }
-  if (!d.message) { alert('Please enter your query / message.'); return false; }
+  if (!d.name)    { alert('Please enter your full name.');        return false; }
+  if (!d.phone)   { alert('Please enter your contact number.');   return false; }
+  if (!d.message) { alert('Please enter your query / message.');  return false; }
   return true;
 }
 
-function submitForm(via) {
+function submitForm() {
   if (!validateForm()) return;
-  const d = getFormData();
-  const c = window._schoolContact || {};
-  const email = c.email || 'gghs4700kagdana@gmail.com';
+  const d  = getFormData();
+  const sc = window._schoolContact || {};
+  const toEmail = sc.email || 'gghs4700kagdana@gmail.com';
 
-  const body = `Name: ${d.name}
-Phone: ${d.phone}
-Address: ${d.address || 'Not provided'}
-Email: ${d.email || 'Not provided'}
-Query: ${d.message}`;
+  const body =
+    `Name: ${d.name}\n` +
+    `Phone: ${d.phone}\n` +
+    `Address: ${d.address || 'Not provided'}\n` +
+    `Email: ${d.email || 'Not provided'}\n` +
+    `Query:\n${d.message}`;
 
-  const mailLink = `mailto:${email}?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailLink;
+  window.location.href =
+    `mailto:${toEmail}?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(body)}`;
   showSuccess();
 }
 
 function submitViaWA(e) {
   e.preventDefault();
   if (!validateForm()) return;
-  const d = getFormData();
-  const c = window._schoolContact || {};
-  const waNumber = c.waNumber || '919416304928';
+  const d  = getFormData();
+  const sc = window._schoolContact || {};
 
-  const text = `*New Query – GGHS Kagdana*\n\n*Name:* ${d.name}\n*Phone:* ${d.phone}\n*Address:* ${d.address || 'N/A'}\n*Email:* ${d.email || 'N/A'}\n*Subject:* ${d.subject}\n*Message:*\n${d.message}`;
-  const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
-  window.open(waLink, '_blank');
+  // Always use the waNumber derived from the admin-set phone
+  const waNumber = sc.waNumber || '919416304928';
+
+  const text =
+    `*New Query – GGHS Kagdana*\n\n` +
+    `*Name:* ${d.name}\n` +
+    `*Phone:* ${d.phone}\n` +
+    `*Address:* ${d.address || 'N/A'}\n` +
+    `*Email:* ${d.email || 'N/A'}\n` +
+    `*Subject:* ${d.subject}\n` +
+    `*Message:*\n${d.message}`;
+
+  window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
   showSuccess();
 }
 
 function showSuccess() {
-  document.getElementById('formSuccess').classList.add('show');
-  setTimeout(() => document.getElementById('formSuccess').classList.remove('show'), 6000);
+  const el = document.getElementById('formSuccess');
+  if (!el) return;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 6000);
 }
 </script>
 

@@ -45,6 +45,7 @@ async function loadDataJson() {
     if (Array.isArray(data.activities) && data.activities.length) DB.set('activities',     data.activities);
     if (Array.isArray(data.gallery)    && data.gallery.length)    DB.set('gallery',        data.gallery);
     if (data.contact && data.contact.email)                       DB.set('school_contact', data.contact);
+    if (Array.isArray(data.download_files) && data.download_files.length) DB.set('download_files', data.download_files);
     if (data.logo)                                                 localStorage.setItem('school_logo', data.logo);
   } catch (_) {
     // Offline or local file – silently use localStorage

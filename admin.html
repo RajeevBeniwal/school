@@ -125,7 +125,7 @@
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" id="loginPass" placeholder="Enter password" />
+        <input type="password" class="form-control" id="loginPass" placeholder="Enter password" value="admin12345" />
         <small style="color:var(--gray-500);font-size:.75rem">Default: <strong>.....</strong></small>
       </div>
       <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doLogin()">🔓 Login</button>
@@ -151,6 +151,7 @@
       <div class="s-nav-item" data-panel="gallery"><span class="icon">🖼️</span> Gallery</div>
       <div class="s-nav-item" data-panel="activities"><span class="icon">📸</span> Activities</div>
       <div class="s-nav-item" data-panel="teachers"><span class="icon">👩‍🏫</span> Teachers</div>
+      <div class="s-nav-item" data-panel="downloads"><span class="icon">📥</span> Downloads</div>
       <div class="s-nav-item" data-panel="settings"><span class="icon">⚙️</span> Settings</div>
     </nav>
     <div class="sidebar-footer">
@@ -479,6 +480,84 @@
         </div>
       </div>
 
+      <!-- ══════════════ DOWNLOADS PANEL ══════════════ -->
+      <div class="panel" id="panel-downloads">
+
+        <!-- Add New File -->
+        <div class="sec-card">
+          <h3>➕ Add Download File</h3>
+          <p style="font-size:.82rem;color:var(--gray-500);margin-bottom:16px">
+            Paste the <strong>raw GitHub URL</strong> (e.g. <code>https://raw.githubusercontent.com/USER/REPO/main/files/name.pdf</code>) for each file you want visitors to download.
+          </p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>File Title</label>
+              <input type="text" class="form-control" id="dlTitle" placeholder="e.g. Admission Form 2024-25" />
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select class="form-control" id="dlCategory">
+                <option value="form">📝 Form</option>
+                <option value="circular">📋 Circular / Notice</option>
+                <option value="timetable">📅 Timetable</option>
+                <option value="result">🏆 Result Document</option>
+                <option value="photo">📸 Photo / Image</option>
+                <option value="other">📂 Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>GitHub Raw File URL &nbsp;<span style="color:#c00">*</span></label>
+            <input type="url" class="form-control" id="dlUrl"
+              placeholder="https://raw.githubusercontent.com/WA-GGHS/gghs-website/main/files/filename.pdf" />
+            <small style="color:var(--gray-500);font-size:.76rem">
+              Go to your GitHub repo → open the file → click <strong>Raw</strong> → copy the URL from the browser address bar.
+            </small>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>File Type</label>
+              <select class="form-control" id="dlType">
+                <option value="pdf">📄 PDF</option>
+                <option value="image">🖼️ Image (JPG/PNG)</option>
+                <option value="doc">📝 Word Document</option>
+                <option value="other">📂 Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" class="form-control" id="dlDate" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description (optional)</label>
+            <input type="text" class="form-control" id="dlDesc" placeholder="Brief description of this file..." />
+          </div>
+          <div id="dlMsg"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+            <button class="btn btn-primary" onclick="saveDownloadItem()">💾 Add File</button>
+            <button class="btn btn-outline" onclick="clearDlForm()">✕ Clear</button>
+          </div>
+          <input type="hidden" id="dlEditId" value="" />
+        </div>
+
+        <!-- How-to box -->
+        <div style="background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:16px 20px;font-size:.83rem;color:var(--gray-700);line-height:1.8">
+          <strong style="color:var(--maroon)">📌 How to add files from GitHub:</strong><br>
+          1. Upload your PDF / image to your GitHub repository (inside a <code>files/</code> folder is recommended).<br>
+          2. Open the file on GitHub → click the <strong>Raw</strong> button → copy the URL from the browser bar.<br>
+          3. Paste the URL above and click <strong>Add File</strong>.<br>
+          4. Click <strong>"📥 Download data.json"</strong> (top banner) → commit to GitHub to publish changes.
+        </div>
+
+        <!-- Existing Downloads List -->
+        <div class="sec-card" style="margin-top:24px">
+          <h3>📂 Manage Download Files</h3>
+          <div id="dlListContainer" style="margin-top:8px"></div>
+        </div>
+
+      </div><!-- /panel-downloads -->
+
     </div><!-- admin-content -->
   </div><!-- admin-main -->
 </div><!-- admin-layout -->
@@ -514,7 +593,7 @@ function doLogout() {
 // ============ PANEL SWITCHING ============
 const panelTitles = {
   dashboard:'📊 Dashboard', results:'📋 Manage Results', gallery:'🖼️ Photo Gallery',
-  activities:'📸 Activities & Notices', teachers:'👩‍🏫 Teacher Profiles', settings:'⚙️ Settings'
+  activities:'📸 Activities & Notices', teachers:'👩‍🏫 Teacher Profiles', downloads:'📥 Downloads Manager', settings:'⚙️ Settings'
 };
 function switchPanel(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -526,6 +605,7 @@ function switchPanel(id) {
   if (id === 'gallery')    { renderGallery(); renderGalCatFilter(); }
   if (id === 'dashboard')  loadDashboard();
   if (id === 'settings')   loadSettingsForm();
+  if (id === 'downloads')  renderDownloadsList();
 }
 document.querySelectorAll('.s-nav-item').forEach(n => n.addEventListener('click', () => switchPanel(n.dataset.panel)));
 
@@ -533,9 +613,10 @@ document.querySelectorAll('.s-nav-item').forEach(n => n.addEventListener('click'
 function initAdmin() {
   document.getElementById('actDate').valueAsDate = new Date();
   document.getElementById('galDate').valueAsDate = new Date();
+  document.getElementById('dlDate').valueAsDate = new Date();
   loadDashboard(); renderActivities(); renderTeachers();
   renderResTable(); populateResClassFilter();
-  renderGallery(); loadSettingsForm();
+  renderGallery(); loadSettingsForm(); renderDownloadsList();
 }
 
 // ============ DASHBOARD ============
@@ -563,15 +644,110 @@ function loadDashboard() {
 }
 
 // ============ PUBLISH: DOWNLOAD data.json ============
+// ============ DOWNLOADS MANAGER ============
+const DL_KEY = 'download_files';
+
+function getDownloadFiles() { return DB.get(DL_KEY, []); }
+
+function saveDownloadItem() {
+  const title    = document.getElementById('dlTitle').value.trim();
+  const url      = document.getElementById('dlUrl').value.trim();
+  const category = document.getElementById('dlCategory').value;
+  const type     = document.getElementById('dlType').value;
+  const date     = document.getElementById('dlDate').value;
+  const desc     = document.getElementById('dlDesc').value.trim();
+  const editId   = document.getElementById('dlEditId').value;
+  if (!title) { showMsg('dlMsg','\u26a0\ufe0f Please enter a file title.','danger'); return; }
+  if (!url)   { showMsg('dlMsg','\u26a0\ufe0f Please enter the GitHub raw file URL.','danger'); return; }
+  const files = getDownloadFiles();
+  const sizeMap = { pdf:'PDF', image:'Image', doc:'Word Doc', other:'File' };
+  if (editId) {
+    const idx = files.findIndex(f => f.id === editId);
+    if (idx > -1) files[idx] = { id:editId, title, url, category, type, date, desc, size:sizeMap[type]||'File' };
+    showMsg('dlMsg','\u2705 File updated!','success');
+  } else {
+    files.push({ id:'dl_'+Date.now(), title, url, category, type, date, desc, size:sizeMap[type]||'File' });
+    showMsg('dlMsg','\u2705 File added to Downloads!','success');
+  }
+  DB.set(DL_KEY, files);
+  clearDlForm();
+  renderDownloadsList();
+  toast('Downloads updated! Download data.json to publish.','success');
+}
+
+function clearDlForm() {
+  ['dlTitle','dlUrl','dlDesc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('dlEditId').value = '';
+  document.getElementById('dlCategory').value = 'form';
+  document.getElementById('dlType').value = 'pdf';
+  document.getElementById('dlDate').valueAsDate = new Date();
+  document.getElementById('dlMsg').innerHTML = '';
+}
+
+function editDownload(id) {
+  const f = getDownloadFiles().find(f => f.id === id);
+  if (!f) return;
+  document.getElementById('dlTitle').value    = f.title || '';
+  document.getElementById('dlUrl').value      = f.url || '';
+  document.getElementById('dlCategory').value = f.category || 'form';
+  document.getElementById('dlType').value     = f.type || 'pdf';
+  document.getElementById('dlDate').value     = f.date || '';
+  document.getElementById('dlDesc').value     = f.desc || '';
+  document.getElementById('dlEditId').value   = id;
+  document.getElementById('panel-downloads').scrollIntoView({ behavior:'smooth' });
+}
+
+function deleteDownload(id) {
+  if (!confirm('Delete this download file?')) return;
+  DB.set(DL_KEY, getDownloadFiles().filter(f => f.id !== id));
+  renderDownloadsList();
+  toast('File removed.','info');
+}
+
+function renderDownloadsList() {
+  const files = getDownloadFiles();
+  const el = document.getElementById('dlListContainer');
+  if (!files.length) {
+    el.innerHTML = '<p style="color:var(--gray-500);font-size:.88rem">No download files yet. Add your first file above.</p>';
+    return;
+  }
+  const catLabels = { form:'\ud83d\udcdd Form', circular:'\ud83d\udccb Circular', timetable:'\ud83d\udcc5 Timetable', result:'\ud83c\udfc6 Result', photo:'\ud83d\udcf8 Photo', other:'\ud83d\udcc2 Other' };
+  el.innerHTML = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.83rem">'
+    + '<thead><tr style="background:var(--maroon);color:#fff">'
+    + '<th style="padding:10px 12px;text-align:left">Title</th>'
+    + '<th style="padding:10px 12px;text-align:left">Category</th>'
+    + '<th style="padding:10px 12px;text-align:left">Type</th>'
+    + '<th style="padding:10px 12px;text-align:left">Date</th>'
+    + '<th style="padding:10px 12px;text-align:left">File URL</th>'
+    + '<th style="padding:10px 12px;text-align:center">Actions</th>'
+    + '</tr></thead><tbody>'
+    + files.map((f, i) => `
+    <tr style="background:${i%2===0?'var(--cream)':'var(--white)'};border-bottom:1px solid var(--gray-200)">
+      <td style="padding:10px 12px;font-weight:700;color:var(--maroon)">${f.title||'\u2014'}</td>
+      <td style="padding:10px 12px">${catLabels[f.category]||f.category}</td>
+      <td style="padding:10px 12px;text-transform:uppercase;font-size:.75rem">${f.type||'\u2014'}</td>
+      <td style="padding:10px 12px">${f.date||'\u2014'}</td>
+      <td style="padding:10px 12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <a href="${f.url}" target="_blank" style="color:var(--maroon);font-size:.76rem">\ud83d\udd17 View File</a>
+      </td>
+      <td style="padding:10px 12px;text-align:center;white-space:nowrap">
+        <button class="btn btn-outline btn-sm" onclick="editDownload('${f.id}')">\u270f\ufe0f Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteDownload('${f.id}')">\ud83d\uddd1\ufe0f Delete</button>
+      </td>
+    </tr>`).join('')
+    + '</tbody></table></div>';
+}
+
 function downloadDataJson() {
   const logo = localStorage.getItem('school_logo') || '';
   const data = {
-    results:    DB.get('results', []),
-    activities: DB.get('activities', []),
-    teachers:   DB.get('teachers', []),
-    gallery:    DB.get('gallery', []),
-    contact:    DB.get('school_contact', {}),
-    logo:       logo,
+    results:       DB.get('results', []),
+    activities:    DB.get('activities', []),
+    teachers:      DB.get('teachers', []),
+    gallery:       DB.get('gallery', []),
+    download_files:DB.get('download_files', []),
+    contact:       DB.get('school_contact', {}),
+    logo:          logo,
     _note: 'Commit this file to your GitHub repo root to publish changes to all visitors.'
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -1026,6 +1202,7 @@ function importDataPrompt() {
         if (d.teachers)   DB.set('teachers',d.teachers);
         if (d.gallery)    DB.set('gallery',d.gallery);
         if (d.contact)    DB.set('school_contact',d.contact);
+    if (Array.isArray(d.download_files)) DB.set('download_files', d.download_files);
         if (d.logo)       localStorage.setItem('school_logo',d.logo);
         toast('Data imported successfully!','success');
         initAdmin();
